@@ -228,6 +228,11 @@ details.faq-item summary::-webkit-details-marker{display:none}
 .cta-band .actions{display:flex; gap:12px; flex-wrap:wrap}
 .cta-band .btn-primary{box-shadow:0 10px 28px -10px color-mix(in srgb, var(--accent) 70%, transparent)}
 
+.cta-body{width:100%; display:flex; gap:40px; align-items:flex-start}
+.cta-side{flex:none; display:flex; flex-direction:column; gap:6px; padding-top:4px; white-space:nowrap}
+.cta-side .label{font-size:12px; color:rgba(255,255,255,.5)}
+.cta-side a{font-family:'IBM Plex Mono',monospace; font-size:16px; font-weight:600; color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,255,.3); padding-bottom:2px; transition:border-color .2s ease, color .2s ease}
+.cta-side a:hover{color:var(--accent-2); border-color:var(--accent-2)}
 .contact-form{width:100%; max-width:640px; display:flex; flex-direction:column; gap:14px}
 .contact-form .form-row{display:grid; grid-template-columns:1fr 1fr; gap:14px}
 .contact-form label{display:flex; flex-direction:column; gap:6px; font-size:12px; font-weight:600; color:rgba(255,255,255,.65)}
@@ -241,7 +246,7 @@ details.faq-item summary::-webkit-details-marker{display:none}
 .contact-form .form-foot{display:flex; align-items:center; gap:14px; flex-wrap:wrap}
 .contact-form .form-note{font-size:12.5px; color:rgba(255,255,255,.5); transition:color .3s ease}
 .contact-form .form-note.show{color:var(--accent-2); font-weight:600}
-@media (max-width:640px){.contact-form .form-row{grid-template-columns:1fr}}
+@media (max-width:640px){.contact-form .form-row{grid-template-columns:1fr} .cta-body{flex-direction:column; gap:20px}}
 
 /* stats band: a dark section used for a quick trust strip before pricing */
 .stats-band{background:linear-gradient(170deg,#121319,#0a0a10); border-radius:24px; padding:clamp(32px,5vw,52px); color:#f1f2f8}
@@ -886,21 +891,27 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
   <section id="contact" class="wrap">
     <div class="cta-band reveal">
       <h2>Tell us about your business, and we'll show you what Flint would say to your customers.</h2>
-      <form class="contact-form" id="contactForm">
-        <div class="form-row">
-          <label>Your name<input type="text" name="name" required placeholder="Thabo Mokoena"></label>
-          <label>Email<input type="email" name="email" required placeholder="you@business.co.za"></label>
+      <div class="cta-body">
+        <form class="contact-form" id="contactForm">
+          <div class="form-row">
+            <label>Your name<input type="text" name="name" required placeholder="Thabo Mokoena"></label>
+            <label>Email<input type="email" name="email" required placeholder="you@business.co.za"></label>
+          </div>
+          <div class="form-row">
+            <label>Business name<input type="text" name="business" required placeholder="Dlamini Plumbing"></label>
+            <label>WhatsApp number<input type="tel" name="whatsapp" placeholder="082 000 0000"></label>
+          </div>
+          <label>What should Flint know about your business?<textarea name="message" rows="3" placeholder="What do customers usually ask you on WhatsApp?"></textarea></label>
+          <div class="form-foot">
+            <button type="submit" class="btn btn-primary">Send message</button>
+            <span class="form-note" id="contactNote">Forwards to hello@flint.africa via your email app.</span>
+          </div>
+        </form>
+        <div class="cta-side">
+          <span class="label">Prefer email?</span>
+          <a href="mailto:hello@flint.africa?subject=Flint%20WhatsApp%20Assistant">hello@flint.africa</a>
         </div>
-        <div class="form-row">
-          <label>Business name<input type="text" name="business" required placeholder="Dlamini Plumbing"></label>
-          <label>WhatsApp number<input type="tel" name="whatsapp" placeholder="082 000 0000"></label>
-        </div>
-        <label>What should Flint know about your business?<textarea name="message" rows="3" placeholder="What do customers usually ask you on WhatsApp?"></textarea></label>
-        <div class="form-foot">
-          <button type="submit" class="btn btn-primary">Send message</button>
-          <span class="form-note" id="contactNote">Opens your email app with these details filled in.</span>
-        </div>
-      </form>
+      </div>
     </div>
   </section>
 </main>
