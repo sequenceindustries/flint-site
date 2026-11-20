@@ -210,7 +210,7 @@ details.faq-item summary::-webkit-details-marker{display:none}
 .cta-band{
   border-radius:24px; position:relative; overflow:hidden;
   background:linear-gradient(155deg,#15161f,#0a0a10 55%,#171225);
-  padding:clamp(40px,7vw,64px); display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+  padding:clamp(40px,7vw,64px); display:flex; flex-direction:column; align-items:flex-start; gap:28px;
   color:#f1f2f8;
 }
 .cta-band::before{
@@ -224,9 +224,24 @@ details.faq-item summary::-webkit-details-marker{display:none}
   pointer-events:none;
 }
 .cta-band > *{position:relative; z-index:1}
-.cta-band h2{font-size:clamp(22px,3.2vw,30px); max-width:28ch; color:#fff}
+.cta-band h2{font-size:clamp(22px,3.2vw,30px); max-width:32ch; color:#fff}
 .cta-band .actions{display:flex; gap:12px; flex-wrap:wrap}
 .cta-band .btn-primary{box-shadow:0 10px 28px -10px color-mix(in srgb, var(--accent) 70%, transparent)}
+
+.contact-form{width:100%; max-width:640px; display:flex; flex-direction:column; gap:14px}
+.contact-form .form-row{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+.contact-form label{display:flex; flex-direction:column; gap:6px; font-size:12px; font-weight:600; color:rgba(255,255,255,.65)}
+.contact-form input, .contact-form textarea{
+  background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); border-radius:10px; padding:11px 13px;
+  color:#fff; font-family:inherit; font-size:14px; font-weight:400; resize:vertical;
+  transition:border-color .2s ease, background .2s ease;
+}
+.contact-form input::placeholder, .contact-form textarea::placeholder{color:rgba(255,255,255,.32)}
+.contact-form input:focus, .contact-form textarea:focus{outline:none; border-color:var(--accent-2); background:rgba(255,255,255,.1)}
+.contact-form .form-foot{display:flex; align-items:center; gap:14px; flex-wrap:wrap}
+.contact-form .form-note{font-size:12.5px; color:rgba(255,255,255,.5); transition:color .3s ease}
+.contact-form .form-note.show{color:var(--accent-2); font-weight:600}
+@media (max-width:640px){.contact-form .form-row{grid-template-columns:1fr}}
 
 /* stats band: a dark section used for a quick trust strip before pricing */
 .stats-band{background:linear-gradient(170deg,#121319,#0a0a10); border-radius:24px; padding:clamp(32px,5vw,52px); color:#f1f2f8}
@@ -871,9 +886,21 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
   <section id="contact" class="wrap">
     <div class="cta-band reveal">
       <h2>Tell us about your business, and we'll show you what Flint would say to your customers.</h2>
-      <div class="actions">
-        <a class="btn btn-primary" href="mailto:hello@flint.africa?subject=Flint%20WhatsApp%20Assistant">Email hello@flint.africa</a>
-      </div>
+      <form class="contact-form" id="contactForm">
+        <div class="form-row">
+          <label>Your name<input type="text" name="name" required placeholder="Thabo Mokoena"></label>
+          <label>Email<input type="email" name="email" required placeholder="you@business.co.za"></label>
+        </div>
+        <div class="form-row">
+          <label>Business name<input type="text" name="business" required placeholder="Dlamini Plumbing"></label>
+          <label>WhatsApp number<input type="tel" name="whatsapp" placeholder="082 000 0000"></label>
+        </div>
+        <label>What should Flint know about your business?<textarea name="message" rows="3" placeholder="What do customers usually ask you on WhatsApp?"></textarea></label>
+        <div class="form-foot">
+          <button type="submit" class="btn btn-primary">Send message</button>
+          <span class="form-note" id="contactNote">Opens your email app with these details filled in.</span>
+        </div>
+      </form>
     </div>
   </section>
 </main>
@@ -994,6 +1021,38 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
 
     clearBody();
     setTimeout(function(){ playFrom(0); }, 400 + idx * 350);
+  });
+})();
+
+/* contact form: builds a pre-filled email from the fields */
+(function(){
+  var form = document.getElementById('contactForm');
+  if (!form) return;
+  var note = document.getElementById('contactNote');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var data = new FormData(form);
+    var name = (data.get('name') || '').trim();
+    var email = (data.get('email') || '').trim();
+    var business = (data.get('business') || '').trim();
+    var whatsapp = (data.get('whatsapp') || '').trim();
+    var message = (data.get('message') || '').trim();
+    var subject = 'Flint WhatsApp Assistant — ' + (business || name || 'New enquiry');
+    var bodyLines = [
+      'Name: ' + name,
+      'Email: ' + email,
+      'Business: ' + business,
+      'WhatsApp number: ' + (whatsapp || '—'),
+      '',
+      'What they want Flint to know:',
+      message || '—'
+    ];
+    var mailto = 'mailto:hello@flint.africa?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(bodyLines.join('\n'));
+    window.location.href = mailto;
+    if (note){
+      note.textContent = 'Opening your email app with these details filled in…';
+      note.classList.add('show');
+    }
   });
 })();
 
