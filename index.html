@@ -206,16 +206,23 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
 .phone-head .who b{font-size:13px; display:block}
 .phone-head .who span{font-size:10.5px; color:var(--good)}
 .phone-head .spacer{margin-left:auto; display:flex; gap:12px; color:var(--muted)}
-.phone-body{padding:14px 12px; display:flex; flex-direction:column; gap:9px; background:var(--chatbg); min-height:280px}
+.phone-body{padding:14px 12px; display:flex; flex-direction:column; gap:9px; background:var(--chatbg); height:336px; overflow-y:auto; scrollbar-width:none}
+.phone-body::-webkit-scrollbar{display:none}
 .phone-home{height:18px; display:flex; align-items:center; justify-content:center; background:var(--chatbg)}
 .phone-home::after{content:""; width:94px; height:4px; border-radius:3px; background:var(--muted-2); opacity:.6}
-.bubble-row{display:flex; flex-direction:column}
+.bubble-row{display:flex; flex-direction:column; flex:none; opacity:0; transform:translateY(8px); transition:opacity .35s ease, transform .35s ease}
+.bubble-row.show{opacity:1; transform:translateY(0)}
 .bubble-row.out{align-items:flex-end}
 .bubble-row.in{align-items:flex-start}
 .bubble{max-width:82%; padding:9px 13px; border-radius:14px; font-size:13.5px; line-height:1.5}
 .bubble-row.in .bubble{background:var(--surface); border:1px solid var(--border); border-top-left-radius:3px}
 .bubble-row.out .bubble{background:color-mix(in srgb, var(--accent) 14%, var(--surface)); border:1px solid color-mix(in srgb, var(--accent) 30%, var(--border)); border-top-right-radius:3px}
 .bubble-time{font-size:10.5px; color:var(--muted-2); margin-top:3px; padding:0 2px}
+.bubble.typing{display:inline-flex; gap:4px; align-items:center; padding:11px 15px}
+.bubble.typing span{width:6px; height:6px; border-radius:50%; background:var(--muted-2); display:inline-block; animation:typingDot 1.2s infinite ease-in-out}
+.bubble.typing span:nth-child(2){animation-delay:.2s}
+.bubble.typing span:nth-child(3){animation-delay:.4s}
+@keyframes typingDot{0%,60%,100%{transform:translateY(0); opacity:.4} 30%{transform:translateY(-4px); opacity:1}}
 .demo-tag{font-size:12px; color:var(--muted-2); margin-top:10px}
 
 /* dashboard mockup */
@@ -385,7 +392,6 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
             <div class="phone-home"></div>
           </div>
         </div>
-        <p class="demo-tag">Illustrative example, not a real customer conversation.</p>
       </div>
 
       <div>
@@ -424,7 +430,6 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
             <div class="phone-home"></div>
           </div>
         </div>
-        <p class="demo-tag">Illustrative example based on snapcash's real application flow.</p>
       </div>
 
       <div>
@@ -459,7 +464,6 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
             <div class="phone-home"></div>
           </div>
         </div>
-        <p class="demo-tag">Illustrative example, not a real customer conversation.</p>
       </div>
     </div>
   </section>
@@ -783,5 +787,71 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
     };
     once();
   }
+})();
+
+/* animated demo chats */
+(function(){
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var bodies = document.querySelectorAll('.phone-body');
+
+  bodies.forEach(function(body, idx){
+    var rows = Array.prototype.slice.call(body.children);
+    if (!rows.length) return;
+
+    if (reduced){
+      rows.forEach(function(r){ r.classList.add('show'); });
+      return;
+    }
+
+    function clearBody(){
+      rows.forEach(function(r){
+        r.classList.remove('show');
+        if (r.parentNode) r.parentNode.removeChild(r);
+      });
+      var typing = body.querySelector('.typing-row');
+      if (typing) typing.parentNode.removeChild(typing);
+    }
+
+    function scrollDown(){
+      body.scrollTo({ top: body.scrollHeight, behavior: 'smooth' });
+    }
+
+    function makeTypingRow(side){
+      var row = document.createElement('div');
+      row.className = 'bubble-row ' + side + ' typing-row';
+      row.innerHTML = '<div class="bubble typing"><span></span><span></span><span></span></div>';
+      return row;
+    }
+
+    function playFrom(i){
+      if (i >= rows.length){
+        setTimeout(function(){
+          clearBody();
+          setTimeout(function(){ playFrom(0); }, 500);
+        }, 2600);
+        return;
+      }
+      var row = rows[i];
+      var side = row.classList.contains('out') ? 'out' : 'in';
+      var bubbleText = row.querySelector('.bubble');
+      var textLen = bubbleText ? bubbleText.textContent.length : 20;
+      var typingTime = Math.min(1500, Math.max(500, textLen * 14));
+
+      var typingRow = makeTypingRow(side);
+      body.appendChild(typingRow);
+      requestAnimationFrame(function(){ typingRow.classList.add('show'); scrollDown(); });
+
+      setTimeout(function(){
+        if (typingRow.parentNode) typingRow.parentNode.removeChild(typingRow);
+        body.appendChild(row);
+        requestAnimationFrame(function(){ row.classList.add('show'); scrollDown(); });
+        var readTime = Math.min(1800, Math.max(650, textLen * 22));
+        setTimeout(function(){ playFrom(i + 1); }, readTime);
+      }, typingTime);
+    }
+
+    clearBody();
+    setTimeout(function(){ playFrom(0); }, 400 + idx * 350);
+  });
 })();
 </script>
