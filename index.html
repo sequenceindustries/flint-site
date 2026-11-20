@@ -139,6 +139,11 @@ section{padding-block:clamp(56px,9vw,104px)}
 .plan.featured{border-color:var(--accent); box-shadow:0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent)}
 .plan .pill{position:absolute; top:-12px; left:28px; background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:var(--accent-fg); font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:5px 12px; border-radius:99px}
 .plan h3{font-size:19px}
+.plan-badges{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px}
+.plan-badge{font-size:12.5px; font-weight:700; letter-spacing:.01em; padding:7px 13px; border-radius:99px; display:inline-flex; align-items:center; gap:6px; line-height:1}
+.plan-badge svg{flex:none}
+.plan-badge.trial{background:var(--good); color:#fff}
+.plan-badge.fee{background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:var(--accent-fg)}
 .plan .price{display:flex; align-items:baseline; gap:6px; font-family:'IBM Plex Mono',monospace}
 .plan .price .amount{font-size:36px; font-weight:600; color:var(--fg)}
 .plan .price .period{font-size:13px; color:var(--muted)}
@@ -301,7 +306,7 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
           <a class="btn btn-primary" href="#pricing">See pricing</a>
           <a class="btn btn-ghost" href="#contact">Talk to us</a>
         </div>
-        <div class="hero-proof"><b>Try it free for 1 week</b> &mdash; no card needed to get started.</div>
+        <div class="hero-proof"><span class="plan-badge trial"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> 7-day free trial</span> &mdash; no card needed to get started.</div>
       </div>
       <div class="hero-stage"><canvas id="spark" width="380" height="380" aria-hidden="true"></canvas></div>
     </div>
@@ -547,14 +552,18 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
     <div class="section-head">
       <div class="eyebrow">Pricing</div>
       <h2>Early access pricing for the WhatsApp Business Assistant.</h2>
-      <p>Flint is early. These are the prices our first customers pay, locked in for your first six months. Try any plan free for 1 week, then cancel any time.</p>
+      <p>Flint is early. These are the prices our first customers pay, locked in for your first six months. Try any plan free for 7 days, then cancel any time.</p>
     </div>
 
     <div class="pricing-grid">
       <div class="plan">
         <h3>Starter</h3>
         <div class="price"><span class="amount">R299</span><span class="period">/ month</span></div>
-        <p class="desc">For a business just getting their first automation running. 1 week free, then a once-off R499 setup fee.</p>
+        <div class="plan-badges">
+          <span class="plan-badge trial"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> 7-day free trial</span>
+          <span class="plan-badge fee">R499 setup fee</span>
+        </div>
+        <p class="desc">For a business just getting their first automation running.</p>
         <ul>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> 1 WhatsApp number</li>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> FAQ answers &amp; enquiry capture</li>
@@ -569,7 +578,11 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
         <span class="pill">Most businesses choose this</span>
         <h3>Growth</h3>
         <div class="price"><span class="amount">R599</span><span class="period">/ month</span></div>
-        <p class="desc">Full enquiry, quote, booking and application capture &mdash; built for real day-to-day volume. 1 week free, then a once-off R499 setup fee.</p>
+        <div class="plan-badges">
+          <span class="plan-badge trial"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> 7-day free trial</span>
+          <span class="plan-badge fee">R499 setup fee</span>
+        </div>
+        <p class="desc">Full enquiry, quote, booking and application capture &mdash; built for real day-to-day volume.</p>
         <ul>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Everything in Starter</li>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Booking &amp; application capture</li>
@@ -584,7 +597,7 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
 
     <div class="fees-note">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="5" r="0.9" fill="currentColor"/></svg>
-      <span>Every plan starts with a free 1-week trial &mdash; you only pay once you decide to keep it. Then there's a once-off R499 setup fee, which covers a friendly chat about your business, getting your first answers written up and approved by you, and switching everything on safely.</span>
+      <span>Every plan starts with a free 7-day trial &mdash; you only pay once you decide to keep it. Then there's a once-off R499 setup fee, which covers a friendly chat about your business, getting your first answers written up and approved by you, and switching everything on safely.</span>
     </div>
     <div class="fees-note">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="5" r="0.9" fill="currentColor"/></svg>
