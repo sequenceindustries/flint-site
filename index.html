@@ -191,13 +191,24 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
 .foot-links a:hover{color:var(--fg)}
 
 /* example conversation mockups */
-.demo-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px}
-.phone{background:var(--surface); border:1px solid var(--border); border-radius:18px; overflow:hidden; display:flex; flex-direction:column}
-.phone-head{display:flex; align-items:center; gap:10px; padding:14px 16px; background:var(--surface-2); border-bottom:1px solid var(--border)}
-.phone-head .avatar{width:32px; height:32px; border-radius:50%; background:linear-gradient(135deg,var(--accent),var(--accent-2)); display:flex; align-items:center; justify-content:center; color:var(--accent-fg); font-family:'Syne',sans-serif; font-weight:700; font-size:12.5px; flex:none}
-.phone-head .who b{font-size:14px; display:block}
-.phone-head .who span{font-size:11.5px; color:var(--muted)}
-.phone-body{padding:16px; display:flex; flex-direction:column; gap:10px; background:var(--chatbg); min-height:260px}
+.demo-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px}
+.phone-frame{
+  max-width:270px; margin-inline:auto; background:#111318; border-radius:38px; padding:10px;
+  box-shadow:0 24px 48px -16px rgba(10,10,20,.4), 0 0 0 1px rgba(0,0,0,.06);
+}
+.phone-screen{background:var(--chatbg); border-radius:28px; overflow:hidden; position:relative; display:flex; flex-direction:column}
+.phone-notch{position:absolute; top:0; left:50%; transform:translateX(-50%); width:108px; height:24px; background:#111318; border-radius:0 0 14px 14px; z-index:3}
+.phone-status{display:flex; justify-content:space-between; align-items:center; padding:13px 20px 2px; font-size:11.5px; font-weight:600; color:var(--fg)}
+.phone-status .icons{display:flex; align-items:center; gap:4px; color:var(--fg)}
+.phone-head{display:flex; align-items:center; gap:9px; padding:10px 14px; background:var(--surface-2); border-bottom:1px solid var(--border)}
+.phone-head svg.back{flex:none; color:var(--muted)}
+.phone-head .avatar{width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg,var(--accent),var(--accent-2)); display:flex; align-items:center; justify-content:center; color:var(--accent-fg); font-family:'Syne',sans-serif; font-weight:700; font-size:11px; flex:none}
+.phone-head .who b{font-size:13px; display:block}
+.phone-head .who span{font-size:10.5px; color:var(--good)}
+.phone-head .spacer{margin-left:auto; display:flex; gap:12px; color:var(--muted)}
+.phone-body{padding:14px 12px; display:flex; flex-direction:column; gap:9px; background:var(--chatbg); min-height:280px}
+.phone-home{height:18px; display:flex; align-items:center; justify-content:center; background:var(--chatbg)}
+.phone-home::after{content:""; width:94px; height:4px; border-radius:3px; background:var(--muted-2); opacity:.6}
 .bubble-row{display:flex; flex-direction:column}
 .bubble-row.out{align-items:flex-end}
 .bubble-row.in{align-items:flex-start}
@@ -247,6 +258,9 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
   .dash-body{grid-template-columns:92px 1fr}
   .cta-band{flex-direction:column; align-items:flex-start}
 }
+@media (max-width:1140px) and (min-width:861px){
+  .demo-grid{grid-template-columns:1fr 1fr}
+}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
 
@@ -280,6 +294,7 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
           <a class="btn btn-primary" href="#pricing">See pricing</a>
           <a class="btn btn-ghost" href="#contact">Talk to us</a>
         </div>
+        <div class="hero-proof"><b>Try it free for 1 week</b> &mdash; no card needed to get started.</div>
       </div>
       <div class="hero-stage"><canvas id="spark" width="380" height="380" aria-hidden="true"></canvas></div>
     </div>
@@ -296,6 +311,7 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
         <span class="tag platform">The Flint platform</span>
         <h3>What runs underneath every app</h3>
         <ul>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Understands what customers write using AI &mdash; but only ever replies with what you've approved</li>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Connects to the WhatsApp number you already use &mdash; no new app to install</li>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Guardrails that block anything your business hasn't approved: no invented prices, no promised dates, no made-up policy</li>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Hands real decisions to a person automatically, with a clear summary of the conversation so far</li>
@@ -334,39 +350,113 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
     <div class="section-head">
       <div class="eyebrow">See it in action</div>
       <h2>What a customer actually experiences.</h2>
-      <p>Two example conversations, shown end to end &mdash; from the first message to the customer's details being ready for the business to follow up on.</p>
+      <p>Three example conversations, shown end to end &mdash; from the first message to the customer's details being ready for the business to follow up on.</p>
     </div>
     <div class="demo-grid">
       <div>
-        <div class="phone">
-          <div class="phone-head">
-            <div class="avatar">DP</div>
-            <div class="who"><b>Dlamini Plumbing</b><span>WhatsApp</span></div>
-          </div>
-          <div class="phone-body">
-            <div class="bubble-row in"><div class="bubble">Hi, my kitchen tap is dripping non-stop, can someone look at it this week?</div><div class="bubble-time">09:14</div></div>
-            <div class="bubble-row out"><div class="bubble">Hi! We can help with that. Which suburb is the job in?</div><div class="bubble-time">09:14</div></div>
-            <div class="bubble-row in"><div class="bubble">Roodepoort</div><div class="bubble-time">09:15</div></div>
-            <div class="bubble-row out"><div class="bubble">Great, we cover Roodepoort. What is leaking, and where in the house?</div><div class="bubble-time">09:15</div></div>
-            <div class="bubble-row in"><div class="bubble">Kitchen tap, a bit under the sink too</div><div class="bubble-time">09:16</div></div>
-            <div class="bubble-row out"><div class="bubble">Got it. Our call-out fee is R350, which covers the visit and a diagnosis. I've passed this to Sipho &mdash; he'll confirm a time with you within the hour.</div><div class="bubble-time">09:16</div></div>
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <div class="phone-notch"></div>
+            <div class="phone-status">
+              <span>9:41</span>
+              <div class="icons">
+                <svg width="15" height="10" viewBox="0 0 15 10" fill="currentColor"><rect x="0" y="6" width="2.5" height="4" rx="0.5"/><rect x="4" y="4" width="2.5" height="6" rx="0.5"/><rect x="8" y="2" width="2.5" height="8" rx="0.5"/><rect x="12" y="0" width="2.5" height="10" rx="0.5"/></svg>
+                <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 3.5C4.5 0.2 9.5 0.2 13 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M3.3 6C5.4 4 8.6 4 10.7 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="7" cy="8.6" r="1.1" fill="currentColor"/></svg>
+                <svg width="22" height="11" viewBox="0 0 22 11" fill="none"><rect x="0.5" y="0.5" width="18" height="10" rx="2.5" stroke="currentColor"/><rect x="2" y="2" width="15" height="7" rx="1.2" fill="currentColor"/><rect x="19.5" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+              </div>
+            </div>
+            <div class="phone-head">
+              <svg class="back" width="9" height="15" viewBox="0 0 9 15" fill="none"><path d="M7.5 1.5L1 7.5l6.5 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div class="avatar">DP</div>
+              <div class="who"><b>Dlamini Plumbing</b><span>online</span></div>
+              <div class="spacer">
+                <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><rect x="0" y="1" width="10" height="10" rx="2"/><path d="M11 4.2 15 1.5v9l-4-2.7Z"/></svg>
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M1 2c0-.6.4-1 1-1h1.6c.5 0 .9.3 1 .8l.6 2.1c.1.4 0 .8-.3 1L3.6 6c.8 1.6 2 2.8 3.6 3.6l1.1-1.3c.3-.3.7-.4 1-.3l2.1.6c.5.1.8.5.8 1V11c0 .6-.4 1-1 1C6 12 1 7 1 2Z"/></svg>
+              </div>
+            </div>
+            <div class="phone-body">
+              <div class="bubble-row in"><div class="bubble">Hi, my kitchen tap is dripping non-stop, can someone look at it this week?</div><div class="bubble-time">09:14</div></div>
+              <div class="bubble-row out"><div class="bubble">Hi! We can help with that. Which suburb is the job in?</div><div class="bubble-time">09:14</div></div>
+              <div class="bubble-row in"><div class="bubble">Roodepoort</div><div class="bubble-time">09:15</div></div>
+              <div class="bubble-row out"><div class="bubble">Great, we cover Roodepoort. What is leaking, and where in the house?</div><div class="bubble-time">09:15</div></div>
+              <div class="bubble-row in"><div class="bubble">Kitchen tap, a bit under the sink too</div><div class="bubble-time">09:16</div></div>
+              <div class="bubble-row out"><div class="bubble">Got it. Our call-out fee is R350, which covers the visit and a diagnosis. I've passed this to Sipho &mdash; he'll confirm a time within the hour.</div><div class="bubble-time">09:16</div></div>
+            </div>
+            <div class="phone-home"></div>
           </div>
         </div>
         <p class="demo-tag">Illustrative example, not a real customer conversation.</p>
       </div>
+
       <div>
-        <div class="phone">
-          <div class="phone-head">
-            <div class="avatar">SH</div>
-            <div class="who"><b>Sparkle Home Cleaning</b><span>WhatsApp</span></div>
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <div class="phone-notch"></div>
+            <div class="phone-status">
+              <span>9:41</span>
+              <div class="icons">
+                <svg width="15" height="10" viewBox="0 0 15 10" fill="currentColor"><rect x="0" y="6" width="2.5" height="4" rx="0.5"/><rect x="4" y="4" width="2.5" height="6" rx="0.5"/><rect x="8" y="2" width="2.5" height="8" rx="0.5"/><rect x="12" y="0" width="2.5" height="10" rx="0.5"/></svg>
+                <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 3.5C4.5 0.2 9.5 0.2 13 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M3.3 6C5.4 4 8.6 4 10.7 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="7" cy="8.6" r="1.1" fill="currentColor"/></svg>
+                <svg width="22" height="11" viewBox="0 0 22 11" fill="none"><rect x="0.5" y="0.5" width="18" height="10" rx="2.5" stroke="currentColor"/><rect x="2" y="2" width="15" height="7" rx="1.2" fill="currentColor"/><rect x="19.5" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+              </div>
+            </div>
+            <div class="phone-head">
+              <svg class="back" width="9" height="15" viewBox="0 0 9 15" fill="none"><path d="M7.5 1.5L1 7.5l6.5 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div class="avatar">SC</div>
+              <div class="who"><b>snapcash</b><span>online</span></div>
+              <div class="spacer">
+                <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><rect x="0" y="1" width="10" height="10" rx="2"/><path d="M11 4.2 15 1.5v9l-4-2.7Z"/></svg>
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M1 2c0-.6.4-1 1-1h1.6c.5 0 .9.3 1 .8l.6 2.1c.1.4 0 .8-.3 1L3.6 6c.8 1.6 2 2.8 3.6 3.6l1.1-1.3c.3-.3.7-.4 1-.3l2.1.6c.5.1.8.5.8 1V11c0 .6-.4 1-1 1C6 12 1 7 1 2Z"/></svg>
+              </div>
+            </div>
+            <div class="phone-body">
+              <div class="bubble-row in"><div class="bubble">Hi, I'd like to apply for a loan</div><div class="bubble-time">11:02</div></div>
+              <div class="bubble-row out"><div class="bubble">Hi! Happy to help. Before we start &mdash; do you consent to us using your details to process this application? Reply YES or NO.</div><div class="bubble-time">11:02</div></div>
+              <div class="bubble-row in"><div class="bubble">Yes</div><div class="bubble-time">11:03</div></div>
+              <div class="bubble-row out"><div class="bubble">Great. What's your full name?</div><div class="bubble-time">11:03</div></div>
+              <div class="bubble-row in"><div class="bubble">Thabo Mokoena</div><div class="bubble-time">11:03</div></div>
+              <div class="bubble-row out"><div class="bubble">Thanks Thabo. How much would you like to borrow, and over how many days?</div><div class="bubble-time">11:04</div></div>
+              <div class="bubble-row in"><div class="bubble">R1 000, over 10 days</div><div class="bubble-time">11:04</div></div>
+              <div class="bubble-row out"><div class="bubble">Please send a photo of your ID and a recent payslip to finish your application.</div><div class="bubble-time">11:04</div></div>
+              <div class="bubble-row in"><div class="bubble">[2 photos sent]</div><div class="bubble-time">11:05</div></div>
+              <div class="bubble-row out"><div class="bubble">Got both documents &mdash; your application is complete. Our team will review it and come back to you shortly.</div><div class="bubble-time">11:05</div></div>
+            </div>
+            <div class="phone-home"></div>
           </div>
-          <div class="phone-body">
-            <div class="bubble-row in"><div class="bubble">Hi, do you clean in Sandton? Need a once-off deep clean before I move out</div><div class="bubble-time">14:02</div></div>
-            <div class="bubble-row out"><div class="bubble">Yes, we clean homes in Sandton. How many bedrooms does the home have?</div><div class="bubble-time">14:02</div></div>
-            <div class="bubble-row in"><div class="bubble">3 bedrooms</div><div class="bubble-time">14:03</div></div>
-            <div class="bubble-row out"><div class="bubble">Any extras, like windows, oven or fridge? Reply NONE if not.</div><div class="bubble-time">14:03</div></div>
-            <div class="bubble-row in"><div class="bubble">Oven and windows please</div><div class="bubble-time">14:04</div></div>
-            <div class="bubble-row out"><div class="bubble">Perfect &mdash; I've sent this through to Nomvula, and she'll confirm pricing and a time with you shortly.</div><div class="bubble-time">14:04</div></div>
+        </div>
+        <p class="demo-tag">Illustrative example based on snapcash's real application flow.</p>
+      </div>
+
+      <div>
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <div class="phone-notch"></div>
+            <div class="phone-status">
+              <span>9:41</span>
+              <div class="icons">
+                <svg width="15" height="10" viewBox="0 0 15 10" fill="currentColor"><rect x="0" y="6" width="2.5" height="4" rx="0.5"/><rect x="4" y="4" width="2.5" height="6" rx="0.5"/><rect x="8" y="2" width="2.5" height="8" rx="0.5"/><rect x="12" y="0" width="2.5" height="10" rx="0.5"/></svg>
+                <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 3.5C4.5 0.2 9.5 0.2 13 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M3.3 6C5.4 4 8.6 4 10.7 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="7" cy="8.6" r="1.1" fill="currentColor"/></svg>
+                <svg width="22" height="11" viewBox="0 0 22 11" fill="none"><rect x="0.5" y="0.5" width="18" height="10" rx="2.5" stroke="currentColor"/><rect x="2" y="2" width="15" height="7" rx="1.2" fill="currentColor"/><rect x="19.5" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+              </div>
+            </div>
+            <div class="phone-head">
+              <svg class="back" width="9" height="15" viewBox="0 0 9 15" fill="none"><path d="M7.5 1.5L1 7.5l6.5 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div class="avatar">SH</div>
+              <div class="who"><b>Sparkle Home Cleaning</b><span>online</span></div>
+              <div class="spacer">
+                <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><rect x="0" y="1" width="10" height="10" rx="2"/><path d="M11 4.2 15 1.5v9l-4-2.7Z"/></svg>
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M1 2c0-.6.4-1 1-1h1.6c.5 0 .9.3 1 .8l.6 2.1c.1.4 0 .8-.3 1L3.6 6c.8 1.6 2 2.8 3.6 3.6l1.1-1.3c.3-.3.7-.4 1-.3l2.1.6c.5.1.8.5.8 1V11c0 .6-.4 1-1 1C6 12 1 7 1 2Z"/></svg>
+              </div>
+            </div>
+            <div class="phone-body">
+              <div class="bubble-row in"><div class="bubble">Hi, do you clean in Sandton? Need a once-off deep clean before I move out</div><div class="bubble-time">14:02</div></div>
+              <div class="bubble-row out"><div class="bubble">Yes, we clean homes in Sandton. How many bedrooms does the home have?</div><div class="bubble-time">14:02</div></div>
+              <div class="bubble-row in"><div class="bubble">3 bedrooms</div><div class="bubble-time">14:03</div></div>
+              <div class="bubble-row out"><div class="bubble">Any extras, like windows, oven or fridge? Reply NONE if not.</div><div class="bubble-time">14:03</div></div>
+              <div class="bubble-row in"><div class="bubble">Oven and windows please</div><div class="bubble-time">14:04</div></div>
+              <div class="bubble-row out"><div class="bubble">Perfect &mdash; I've sent this through to Nomvula, and she'll confirm pricing and a time with you shortly.</div><div class="bubble-time">14:04</div></div>
+            </div>
+            <div class="phone-home"></div>
           </div>
         </div>
         <p class="demo-tag">Illustrative example, not a real customer conversation.</p>
@@ -453,14 +543,14 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
     <div class="section-head">
       <div class="eyebrow">Pricing</div>
       <h2>Early access pricing for the WhatsApp Business Assistant.</h2>
-      <p>Flint is early. These are the prices our first customers pay, locked in for your first six months. Cancel any time.</p>
+      <p>Flint is early. These are the prices our first customers pay, locked in for your first six months. Try any plan free for 1 week, then cancel any time.</p>
     </div>
 
     <div class="pricing-grid">
       <div class="plan">
         <h3>Starter</h3>
         <div class="price"><span class="amount">R299</span><span class="period">/ month</span></div>
-        <p class="desc">For a business just getting their first automation running. Plus a once-off R499 setup fee.</p>
+        <p class="desc">For a business just getting their first automation running. 1 week free, then a once-off R499 setup fee.</p>
         <ul>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> 1 WhatsApp number</li>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> FAQ answers &amp; enquiry capture</li>
@@ -468,14 +558,14 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Owner review &amp; approval tools</li>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Email support</li>
         </ul>
-        <a class="btn btn-ghost" href="#contact">Start with Starter</a>
+        <a class="btn btn-ghost" href="#contact">Try Starter free</a>
       </div>
 
       <div class="plan featured">
         <span class="pill">Most businesses choose this</span>
         <h3>Growth</h3>
         <div class="price"><span class="amount">R599</span><span class="period">/ month</span></div>
-        <p class="desc">Full enquiry, quote, booking and application capture &mdash; built for real day-to-day volume. Plus a once-off R499 setup fee.</p>
+        <p class="desc">Full enquiry, quote, booking and application capture &mdash; built for real day-to-day volume. 1 week free, then a once-off R499 setup fee.</p>
         <ul>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Everything in Starter</li>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Booking &amp; application capture</li>
@@ -484,13 +574,13 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Up to 2,000 conversations / month</li>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Priority WhatsApp support</li>
         </ul>
-        <a class="btn btn-primary" href="#contact">Start with Growth</a>
+        <a class="btn btn-primary" href="#contact">Try Growth free</a>
       </div>
     </div>
 
     <div class="fees-note">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="5" r="0.9" fill="currentColor"/></svg>
-      <span>Every plan includes a once-off R499 setup fee. That covers a friendly chat about your business, getting your first answers written up and approved by you, and switching everything on safely.</span>
+      <span>Every plan starts with a free 1-week trial &mdash; you only pay once you decide to keep it. Then there's a once-off R499 setup fee, which covers a friendly chat about your business, getting your first answers written up and approved by you, and switching everything on safely.</span>
     </div>
     <div class="fees-note">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="5" r="0.9" fill="currentColor"/></svg>
@@ -526,7 +616,7 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
       </details>
       <details class="faq-item">
         <summary class="faq-q">Is there anything I pay besides the monthly plan?<span class="plus"></span></summary>
-        <div class="faq-a">Yes, two things. A once-off R499 setup fee when you join, which covers your onboarding chat and getting your first answers written and approved. And WhatsApp's own messaging fees from Meta once you're past the free monthly allowance, billed at cost with no markup from us &mdash; usually a few rand a month for a typical small business. We'll show you the real numbers before you commit to anything.</div>
+        <div class="faq-a">You get the first week completely free, so you can see it working before you pay anything. After that, there are two things: a once-off R499 setup fee, which covers your onboarding chat and getting your first answers written and approved. And WhatsApp's own messaging fees from Meta once you're past the free monthly allowance, billed at cost with no markup from us &mdash; usually a few rand a month for a typical small business. We'll show you the real numbers before you commit to anything.</div>
       </details>
       <details class="faq-item">
         <summary class="faq-q">What about my customers' data and POPIA?<span class="plus"></span></summary>
