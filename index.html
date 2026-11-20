@@ -10,7 +10,8 @@
   --fg:#14151d; --muted:#5a5e70; --muted-2:#888da0;
   --accent:#4f46e5; --accent-2:#0ea5e9; --accent-fg:#ffffff;
   --mono:#3c3f4d;
-  --good:#16915a;
+  --good:#16915a; --warn:#b4601a;
+  --chatbg:#eef1f6;
   color-scheme:light;
   font-family:'Inter',system-ui,-apple-system,sans-serif;
 }
@@ -20,7 +21,8 @@
     --fg:#f1f2f8; --muted:#a2a6b8; --muted-2:#767a8d;
     --accent:#6366f1; --accent-2:#38bdf8; --accent-fg:#0b0c12;
     --mono:#c6c9da;
-    --good:#34d399;
+    --good:#34d399; --warn:#f0a63c;
+    --chatbg:#11141c;
     color-scheme:dark;
   }
 }
@@ -29,7 +31,8 @@
   --fg:#f1f2f8; --muted:#a2a6b8; --muted-2:#767a8d;
   --accent:#6366f1; --accent-2:#38bdf8; --accent-fg:#0b0c12;
   --mono:#c6c9da;
-  --good:#34d399;
+  --good:#34d399; --warn:#f0a63c;
+  --chatbg:#11141c;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -156,13 +159,6 @@ section{padding-block:clamp(56px,9vw,104px)}
 .enterprise-row h4{font-size:16px}
 .enterprise-row p{font-size:13.5px; color:var(--muted); margin-top:4px}
 
-/* roadmap */
-.roadmap{display:grid; grid-template-columns:1fr 1fr; gap:24px}
-.roadmap-card{background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:28px}
-.roadmap-card h3{font-size:18px; margin-bottom:12px}
-.roadmap-card p{color:var(--muted); font-size:14.5px}
-.roadmap-card.next{border-style:dashed}
-
 /* faq */
 .faq-item{border-bottom:1px solid var(--border)}
 .faq-q{
@@ -194,6 +190,48 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
 .foot-links a{text-decoration:none; color:var(--muted-2)}
 .foot-links a:hover{color:var(--fg)}
 
+/* example conversation mockups */
+.demo-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px}
+.phone{background:var(--surface); border:1px solid var(--border); border-radius:18px; overflow:hidden; display:flex; flex-direction:column}
+.phone-head{display:flex; align-items:center; gap:10px; padding:14px 16px; background:var(--surface-2); border-bottom:1px solid var(--border)}
+.phone-head .avatar{width:32px; height:32px; border-radius:50%; background:linear-gradient(135deg,var(--accent),var(--accent-2)); display:flex; align-items:center; justify-content:center; color:var(--accent-fg); font-family:'Syne',sans-serif; font-weight:700; font-size:12.5px; flex:none}
+.phone-head .who b{font-size:14px; display:block}
+.phone-head .who span{font-size:11.5px; color:var(--muted)}
+.phone-body{padding:16px; display:flex; flex-direction:column; gap:10px; background:var(--chatbg); min-height:260px}
+.bubble-row{display:flex; flex-direction:column}
+.bubble-row.out{align-items:flex-end}
+.bubble-row.in{align-items:flex-start}
+.bubble{max-width:82%; padding:9px 13px; border-radius:14px; font-size:13.5px; line-height:1.5}
+.bubble-row.in .bubble{background:var(--surface); border:1px solid var(--border); border-top-left-radius:3px}
+.bubble-row.out .bubble{background:color-mix(in srgb, var(--accent) 14%, var(--surface)); border:1px solid color-mix(in srgb, var(--accent) 30%, var(--border)); border-top-right-radius:3px}
+.bubble-time{font-size:10.5px; color:var(--muted-2); margin-top:3px; padding:0 2px}
+.demo-tag{font-size:12px; color:var(--muted-2); margin-top:10px}
+
+/* dashboard mockup */
+.dash-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px}
+.dash-mock{background:var(--surface); border:1px solid var(--border); border-radius:16px; overflow:hidden}
+.dash-top{display:flex; align-items:center; gap:7px; padding:10px 14px; background:var(--surface-2); border-bottom:1px solid var(--border)}
+.dash-top .dot{width:8px; height:8px; border-radius:50%; background:var(--border)}
+.dash-top .url{margin-left:8px; font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--muted-2); background:var(--bg); padding:3px 10px; border-radius:99px}
+.dash-body{display:grid; grid-template-columns:118px 1fr; min-height:260px}
+.dash-nav{background:var(--surface-2); border-right:1px solid var(--border); padding:14px 8px; display:flex; flex-direction:column; gap:4px}
+.dash-nav span{display:block; padding:8px 10px; border-radius:8px; font-size:12px; color:var(--muted)}
+.dash-nav span.active{background:var(--surface); color:var(--fg); font-weight:600; box-shadow:0 0 0 1px var(--border)}
+.dash-main{padding:16px}
+.dash-main h5{font-family:'Syne',sans-serif; font-size:13px; margin-bottom:10px; color:var(--muted-2); text-transform:uppercase; letter-spacing:.06em}
+.convo-row{display:flex; gap:10px; align-items:center; padding:9px 2px}
+.convo-row+.convo-row{border-top:1px solid var(--border)}
+.convo-row .av{width:28px; height:28px; border-radius:50%; background:var(--surface-2); display:flex; align-items:center; justify-content:center; font-size:10.5px; font-weight:700; color:var(--muted); flex:none}
+.convo-row .meta{flex:1; min-width:0}
+.convo-row .meta b{font-size:12.5px; display:block}
+.convo-row .meta span{font-size:11.5px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:block}
+.convo-row .status{font-size:10px; padding:3px 7px; border-radius:99px; font-weight:600; white-space:nowrap; flex:none}
+.status.needs{background:color-mix(in srgb, var(--warn) 20%, transparent); color:var(--warn)}
+.status.handled{background:color-mix(in srgb, var(--good) 18%, transparent); color:var(--good)}
+.biz-row{display:flex; justify-content:space-between; align-items:center; gap:12px; padding:10px 2px; border-bottom:1px solid var(--border); font-size:12.5px}
+.biz-row:last-child{border-bottom:none}
+.biz-row .label{color:var(--muted); font-size:11.5px; display:block; margin-bottom:2px}
+
 @media (max-width:860px){
   .navlinks, .navcta .btn-ghost{display:none}
   .menu-toggle{display:block}
@@ -204,7 +242,9 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
   .steps{grid-template-columns:1fr 1fr}
   .why-grid{grid-template-columns:1fr}
   .pricing-grid{grid-template-columns:1fr}
-  .roadmap{grid-template-columns:1fr}
+  .demo-grid{grid-template-columns:1fr}
+  .dash-grid{grid-template-columns:1fr}
+  .dash-body{grid-template-columns:92px 1fr}
   .cta-band{flex-direction:column; align-items:flex-start}
 }
 </style>
@@ -239,10 +279,6 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
         <div class="hero-ctas">
           <a class="btn btn-primary" href="#pricing">See pricing</a>
           <a class="btn btn-ghost" href="#contact">Talk to us</a>
-        </div>
-        <div class="hero-proof">
-          <span class="mono" style="color:var(--good)">&#9679;</span>
-          <span>Live on <b>snapcash</b>, an NCR-registered online lender &mdash; answering real loan enquiries every day.</span>
         </div>
       </div>
       <div class="hero-stage"><canvas id="spark" width="380" height="380" aria-hidden="true"></canvas></div>
@@ -283,14 +319,104 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
   <section id="how" class="wrap">
     <div class="section-head">
       <div class="eyebrow">Setup</div>
-      <h2>Live in an afternoon, not a dev sprint.</h2>
-      <p>No code, no new inbox to learn, nothing goes live until you've seen and approved it.</p>
+      <h2>Up and running in an afternoon.</h2>
+      <p>No computer skills needed, no new app to learn, and nothing goes live until you've seen and approved it.</p>
     </div>
     <div class="steps">
       <div class="step"><span class="num mono">01</span><h4>Connect your number</h4><p>Keep your existing WhatsApp Business number and app. Flint sits alongside it.</p></div>
       <div class="step"><span class="num mono">02</span><h4>Tell Flint about your business</h4><p>Answer plain questions about what you do, your hours, your prices and your policies.</p></div>
       <div class="step"><span class="num mono">03</span><h4>Approve every answer</h4><p>Review each drafted reply. Nothing reaches a customer until you've approved the exact wording.</p></div>
       <div class="step"><span class="num mono">04</span><h4>Switch it on</h4><p>Flint starts replying immediately. Anything it can't handle lands with you, with full context.</p></div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">See it in action</div>
+      <h2>What a customer actually experiences.</h2>
+      <p>Two example conversations, shown end to end &mdash; from the first message to the customer's details being ready for the business to follow up on.</p>
+    </div>
+    <div class="demo-grid">
+      <div>
+        <div class="phone">
+          <div class="phone-head">
+            <div class="avatar">DP</div>
+            <div class="who"><b>Dlamini Plumbing</b><span>WhatsApp</span></div>
+          </div>
+          <div class="phone-body">
+            <div class="bubble-row in"><div class="bubble">Hi, my kitchen tap is dripping non-stop, can someone look at it this week?</div><div class="bubble-time">09:14</div></div>
+            <div class="bubble-row out"><div class="bubble">Hi! We can help with that. Which suburb is the job in?</div><div class="bubble-time">09:14</div></div>
+            <div class="bubble-row in"><div class="bubble">Roodepoort</div><div class="bubble-time">09:15</div></div>
+            <div class="bubble-row out"><div class="bubble">Great, we cover Roodepoort. What is leaking, and where in the house?</div><div class="bubble-time">09:15</div></div>
+            <div class="bubble-row in"><div class="bubble">Kitchen tap, a bit under the sink too</div><div class="bubble-time">09:16</div></div>
+            <div class="bubble-row out"><div class="bubble">Got it. Our call-out fee is R350, which covers the visit and a diagnosis. I've passed this to Sipho &mdash; he'll confirm a time with you within the hour.</div><div class="bubble-time">09:16</div></div>
+          </div>
+        </div>
+        <p class="demo-tag">Illustrative example, not a real customer conversation.</p>
+      </div>
+      <div>
+        <div class="phone">
+          <div class="phone-head">
+            <div class="avatar">SH</div>
+            <div class="who"><b>Sparkle Home Cleaning</b><span>WhatsApp</span></div>
+          </div>
+          <div class="phone-body">
+            <div class="bubble-row in"><div class="bubble">Hi, do you clean in Sandton? Need a once-off deep clean before I move out</div><div class="bubble-time">14:02</div></div>
+            <div class="bubble-row out"><div class="bubble">Yes, we clean homes in Sandton. How many bedrooms does the home have?</div><div class="bubble-time">14:02</div></div>
+            <div class="bubble-row in"><div class="bubble">3 bedrooms</div><div class="bubble-time">14:03</div></div>
+            <div class="bubble-row out"><div class="bubble">Any extras, like windows, oven or fridge? Reply NONE if not.</div><div class="bubble-time">14:03</div></div>
+            <div class="bubble-row in"><div class="bubble">Oven and windows please</div><div class="bubble-time">14:04</div></div>
+            <div class="bubble-row out"><div class="bubble">Perfect &mdash; I've sent this through to Nomvula, and she'll confirm pricing and a time with you shortly.</div><div class="bubble-time">14:04</div></div>
+          </div>
+        </div>
+        <p class="demo-tag">Illustrative example, not a real customer conversation.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Your dashboard</div>
+      <h2>See every chat. Manage your business. All in one simple place.</h2>
+      <p>No tech skills needed. One screen shows every conversation your customers have had, and another lets you update your hours, prices and answers whenever they change.</p>
+    </div>
+    <div class="dash-grid">
+      <div class="dash-mock">
+        <div class="dash-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">app.flint.africa</span></div>
+        <div class="dash-body">
+          <div class="dash-nav">
+            <span class="active">Chats</span>
+            <span>Business details</span>
+            <span>Team &amp; numbers</span>
+            <span>Billing</span>
+          </div>
+          <div class="dash-main">
+            <h5>Chats</h5>
+            <div class="convo-row"><div class="av">TM</div><div class="meta"><b>Thabo M.</b><span>Kitchen tap, Roodepoort&hellip;</span></div><span class="status handled">Flint replied</span></div>
+            <div class="convo-row"><div class="av">LN</div><div class="meta"><b>Lerato N.</b><span>Can I get a refund on&hellip;</span></div><span class="status needs">Needs you</span></div>
+            <div class="convo-row"><div class="av">SK</div><div class="meta"><b>Sibusiso K.</b><span>3 bedroom, deep clean&hellip;</span></div><span class="status handled">Flint replied</span></div>
+            <div class="convo-row"><div class="av">AP</div><div class="meta"><b>Anele P.</b><span>Geyser is leaking, urgent&hellip;</span></div><span class="status needs">Needs you</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="dash-mock">
+        <div class="dash-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">app.flint.africa</span></div>
+        <div class="dash-body">
+          <div class="dash-nav">
+            <span>Chats</span>
+            <span class="active">Business details</span>
+            <span>Team &amp; numbers</span>
+            <span>Billing</span>
+          </div>
+          <div class="dash-main">
+            <h5>Business details</h5>
+            <div class="biz-row"><div><span class="label">Hours</span>Mon&ndash;Sat, 7am&ndash;5pm</div><span class="mono" style="color:var(--accent)">Edit</span></div>
+            <div class="biz-row"><div><span class="label">Call-out fee</span>R350</div><span class="mono" style="color:var(--accent)">Edit</span></div>
+            <div class="biz-row"><div><span class="label">Areas covered</span>Soweto, Roodepoort, Joburg South</div><span class="mono" style="color:var(--accent)">Edit</span></div>
+            <div class="biz-row"><div><span class="label">Who gets handed tricky chats</span>Sipho &middot; 082 000 0001</div><span class="mono" style="color:var(--accent)">Edit</span></div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -334,7 +460,7 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
       <div class="plan">
         <h3>Starter</h3>
         <div class="price"><span class="amount">R299</span><span class="period">/ month</span></div>
-        <p class="desc">For a business just getting their first automation running.</p>
+        <p class="desc">For a business just getting their first automation running. Plus a once-off R499 setup fee.</p>
         <ul>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> 1 WhatsApp number</li>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> FAQ answers &amp; enquiry capture</li>
@@ -349,7 +475,7 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
         <span class="pill">Most businesses choose this</span>
         <h3>Growth</h3>
         <div class="price"><span class="amount">R599</span><span class="period">/ month</span></div>
-        <p class="desc">Full enquiry, quote, booking and application capture &mdash; built for real day-to-day volume.</p>
+        <p class="desc">Full enquiry, quote, booking and application capture &mdash; built for real day-to-day volume. Plus a once-off R499 setup fee.</p>
         <ul>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Everything in Starter</li>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Booking &amp; application capture</li>
@@ -364,6 +490,10 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
 
     <div class="fees-note">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="5" r="0.9" fill="currentColor"/></svg>
+      <span>Every plan includes a once-off R499 setup fee. That covers a friendly chat about your business, getting your first answers written up and approved by you, and switching everything on safely.</span>
+    </div>
+    <div class="fees-note">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="5" r="0.9" fill="currentColor"/></svg>
       <span>Plans cover Flint. WhatsApp's own messaging fees from Meta are billed separately, pass-through at cost &mdash; typically a few rand a month at these volumes, since the first 1,000 messages each month are free.</span>
     </div>
 
@@ -373,23 +503,6 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
         <p>More numbers, higher volume, multiple locations, or a custom integration &mdash; let's talk about what you need and price it properly.</p>
       </div>
       <a class="btn btn-ghost" href="#contact">Talk to us</a>
-    </div>
-  </section>
-
-  <section class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">Roadmap</div>
-      <h2>What's live, and what we're building next.</h2>
-    </div>
-    <div class="roadmap">
-      <div class="roadmap-card">
-        <h3>Flint today</h3>
-        <p>The WhatsApp Business Assistant: FAQ answers, quote and enquiry capture, booking and application requests, and handoff to a person &mdash; proven first on snapcash's loan enquiries and now opening to other South African service businesses.</p>
-      </div>
-      <div class="roadmap-card next">
-        <h3>What's next</h3>
-        <p>We're building Flint one app at a time, proving each one on a real business before opening it up more widely. Every future app uses the same rule: it only ever says what you've approved. If you want a say in what we build next, tell us what you're stuck on.</p>
-      </div>
     </div>
   </section>
 
@@ -413,7 +526,7 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
       </details>
       <details class="faq-item">
         <summary class="faq-q">Is there anything I pay besides the monthly plan?<span class="plus"></span></summary>
-        <div class="faq-a">WhatsApp itself charges Meta's own messaging fees once you're past the free monthly allowance, billed at cost with no markup from us. For a typical small business's volume, this usually comes to a few rand a month. We'll show you the real number before you commit to anything.</div>
+        <div class="faq-a">Yes, two things. A once-off R499 setup fee when you join, which covers your onboarding chat and getting your first answers written and approved. And WhatsApp's own messaging fees from Meta once you're past the free monthly allowance, billed at cost with no markup from us &mdash; usually a few rand a month for a typical small business. We'll show you the real numbers before you commit to anything.</div>
       </details>
       <details class="faq-item">
         <summary class="faq-q">What about my customers' data and POPIA?<span class="plus"></span></summary>
