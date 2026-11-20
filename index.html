@@ -163,17 +163,13 @@ section{padding-block:clamp(56px,9vw,104px)}
 .plan li{display:flex; gap:9px; font-size:14px; align-items:flex-start}
 .plan li svg{flex:none; margin-top:3px; color:var(--good)}
 .plan .btn{justify-content:center; width:100%}
-.fees-note{
-  margin-top:28px; padding:16px 18px; border-radius:12px; background:var(--surface-2); border:1px solid var(--border);
-  font-size:13.5px; color:var(--muted); display:flex; gap:10px;
+.fees-card{
+  margin-top:32px; border-radius:16px; border:1px solid var(--border); background:var(--surface-2); overflow:hidden;
 }
-.fees-note svg{flex:none; margin-top:2px; color:var(--accent-2)}
-.enterprise-row{
-  margin-top:20px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
-  padding:20px 24px; border-radius:14px; border:1px dashed var(--border);
-}
-.enterprise-row h4{font-size:16px}
-.enterprise-row p{font-size:13.5px; color:var(--muted); margin-top:4px}
+.fees-card .fees-row{display:flex; gap:12px; padding:18px 22px; font-size:13.5px; color:var(--muted); align-items:flex-start}
+.fees-card .fees-row+.fees-row{border-top:1px solid var(--border)}
+.fees-card svg{flex:none; margin-top:3px; color:var(--accent-2)}
+.fees-card strong{color:var(--fg); font-weight:600}
 
 /* faq */
 .faq-item{border-bottom:1px solid var(--border)}
@@ -236,6 +232,15 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
   background:linear-gradient(155deg,#3a3d4a,#111318 22%,#0a0b10 78%,#2e303c);
   border-radius:46px; padding:12px;
   box-shadow:0 30px 60px -18px rgba(10,10,20,.45), 0 1px 0 rgba(255,255,255,.08) inset, 0 0 0 1px rgba(0,0,0,.4);
+  transform:perspective(1300px) rotateY(-9deg) rotateX(2deg) rotate(-1deg);
+  transition:transform .5s cubic-bezier(.22,1,.36,1);
+  will-change:transform;
+}
+.phone-frame:hover{transform:perspective(1300px) rotateY(0deg) rotateX(0deg) rotate(0deg) scale(1.02)}
+.demo-split.reverse .phone-frame{transform:perspective(1300px) rotateY(9deg) rotateX(2deg) rotate(1deg)}
+.demo-split.reverse .phone-frame:hover{transform:perspective(1300px) rotateY(0deg) rotateX(0deg) rotate(0deg) scale(1.02)}
+@media (prefers-reduced-motion:reduce){
+  .phone-frame, .demo-split.reverse .phone-frame{transform:none}
 }
 .phone-frame::before, .phone-frame::after{content:""; position:absolute; background:linear-gradient(#2c2e39,#1a1b22); border-radius:3px 0 0 3px; left:-3px}
 .phone-frame::before{top:92px; width:3px; height:28px; box-shadow:0 44px 0 #1a1b22}
@@ -281,7 +286,26 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
 .demo-copy p{color:var(--muted); margin-top:14px; max-width:46ch}
 .demo-phone{display:flex; justify-content:center}
 
-/* dashboard mockup */
+/* dashboard mockup, shown inside a laptop frame */
+.laptop-frame{max-width:920px; margin-inline:auto}
+.laptop-screen{
+  position:relative; background:linear-gradient(165deg,#2b2c33,#15151a 60%); border-radius:20px;
+  padding:18px 18px 22px; box-shadow:0 44px 90px -34px rgba(10,10,20,.45), 0 0 0 1px rgba(255,255,255,.05) inset;
+}
+.laptop-screen::before{
+  content:""; position:absolute; top:7px; left:50%; transform:translateX(-50%); width:6px; height:6px;
+  border-radius:50%; background:#000; box-shadow:0 0 0 1.5px rgba(255,255,255,.1);
+}
+.laptop-screen .dash-grid{background:var(--bg); border-radius:12px; padding:22px}
+.laptop-base{
+  height:20px; margin:0 -14px; position:relative;
+  background:linear-gradient(180deg,#34353c,#191a1e); border-radius:0 0 12px 12px;
+  box-shadow:0 6px 14px -6px rgba(0,0,0,.4);
+}
+.laptop-base::after{
+  content:""; position:absolute; left:50%; top:0; transform:translateX(-50%); width:150px; height:8px;
+  background:#0c0c0e; border-radius:0 0 10px 10px;
+}
 .dash-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px}
 .dash-mock{background:var(--surface); border:1px solid var(--border); border-radius:16px; overflow:hidden; transition:transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s ease}
 .dash-mock:hover{transform:translateY(-5px); box-shadow:0 20px 36px -22px rgba(20,20,40,.25)}
@@ -458,7 +482,7 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
   <section id="how" class="wrap">
     <div class="section-head reveal">
       <div class="eyebrow">Setup</div>
-      <h2>Up and running in an afternoon.</h2>
+      <h2>Quick and easy to setup.</h2>
       <p>No computer skills needed, no new app to learn, and nothing goes live until you've seen and approved it.</p>
     </div>
     <div class="steps reveal-stagger">
@@ -473,7 +497,7 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
     <div class="demo-split reveal">
       <div class="demo-copy">
         <div class="eyebrow">See it in action</div>
-        <h2>A dripping tap, sorted without a phone call.</h2>
+        <h2>A customer question, answered without a phone call.</h2>
         <p>Flint asks the right follow-up questions, quotes the call-out fee the business has approved, and hands the job to the right person &mdash; all inside the chat the customer already started.</p>
       </div>
       <div class="demo-phone">
@@ -507,52 +531,6 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
               <div class="bubble-row out"><div class="bubble">Got it. Our call-out fee is R350, which covers the visit and a diagnosis. I've passed this to Sipho &mdash; he'll confirm a time within the hour.</div><div class="bubble-time">09:16</div></div>
             </div>
             <div class="phone-home"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">Your dashboard</div>
-      <h2>See every chat. Manage your business. All in one simple place.</h2>
-      <p>No tech skills needed. One screen shows every conversation your customers have had, and another lets you update your hours, prices and answers whenever they change.</p>
-    </div>
-    <div class="dash-grid reveal-stagger">
-      <div class="dash-mock reveal-item">
-        <div class="dash-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">app.flint.africa</span></div>
-        <div class="dash-body">
-          <div class="dash-nav">
-            <span class="active">Chats</span>
-            <span>Business details</span>
-            <span>Team &amp; numbers</span>
-            <span>Billing</span>
-          </div>
-          <div class="dash-main">
-            <h5>Chats</h5>
-            <div class="convo-row"><div class="av">TM</div><div class="meta"><b>Thabo M.</b><span>Kitchen tap, Roodepoort&hellip;</span></div><span class="status handled">Flint replied</span></div>
-            <div class="convo-row"><div class="av">LN</div><div class="meta"><b>Lerato N.</b><span>Can I get a refund on&hellip;</span></div><span class="status needs">Needs you</span></div>
-            <div class="convo-row"><div class="av">SK</div><div class="meta"><b>Sibusiso K.</b><span>3 bedroom, deep clean&hellip;</span></div><span class="status handled">Flint replied</span></div>
-            <div class="convo-row"><div class="av">AP</div><div class="meta"><b>Anele P.</b><span>Geyser is leaking, urgent&hellip;</span></div><span class="status needs">Needs you</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="dash-mock reveal-item">
-        <div class="dash-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">app.flint.africa</span></div>
-        <div class="dash-body">
-          <div class="dash-nav">
-            <span>Chats</span>
-            <span class="active">Business details</span>
-            <span>Team &amp; numbers</span>
-            <span>Billing</span>
-          </div>
-          <div class="dash-main">
-            <h5>Business details</h5>
-            <div class="biz-row"><div><span class="label">Hours</span>Mon&ndash;Sat, 7am&ndash;5pm</div><span class="mono" style="color:var(--accent)">Edit</span></div>
-            <div class="biz-row"><div><span class="label">Call-out fee</span>R350</div><span class="mono" style="color:var(--accent)">Edit</span></div>
-            <div class="biz-row"><div><span class="label">Areas covered</span>Soweto, Roodepoort, Joburg South</div><span class="mono" style="color:var(--accent)">Edit</span></div>
-            <div class="biz-row"><div><span class="label">Who gets handed tricky chats</span>Sipho &middot; 082 000 0001</div><span class="mono" style="color:var(--accent)">Edit</span></div>
           </div>
         </div>
       </div>
@@ -600,6 +578,57 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
         <h2>Booking enquiries, qualified before they reach you.</h2>
         <p>Flint gathers the details a quote actually needs &mdash; size, extras, location &mdash; then passes a ready-to-quote lead straight to the team member who handles it.</p>
       </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Your dashboard</div>
+      <h2>See every chat. Manage your business. All in one simple place.</h2>
+      <p>No tech skills needed. One screen shows every conversation your customers have had, and another lets you update your hours, prices and answers whenever they change.</p>
+    </div>
+    <div class="laptop-frame reveal">
+      <div class="laptop-screen">
+        <div class="dash-grid reveal-stagger">
+          <div class="dash-mock reveal-item">
+            <div class="dash-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">app.flint.africa</span></div>
+            <div class="dash-body">
+              <div class="dash-nav">
+                <span class="active">Chats</span>
+                <span>Business details</span>
+                <span>Team &amp; numbers</span>
+                <span>Billing</span>
+              </div>
+              <div class="dash-main">
+                <h5>Chats</h5>
+                <div class="convo-row"><div class="av">TM</div><div class="meta"><b>Thabo M.</b><span>Kitchen tap, Roodepoort&hellip;</span></div><span class="status handled">Flint replied</span></div>
+                <div class="convo-row"><div class="av">LN</div><div class="meta"><b>Lerato N.</b><span>Can I get a refund on&hellip;</span></div><span class="status needs">Needs you</span></div>
+                <div class="convo-row"><div class="av">SK</div><div class="meta"><b>Sibusiso K.</b><span>3 bedroom, deep clean&hellip;</span></div><span class="status handled">Flint replied</span></div>
+                <div class="convo-row"><div class="av">AP</div><div class="meta"><b>Anele P.</b><span>Geyser is leaking, urgent&hellip;</span></div><span class="status needs">Needs you</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="dash-mock reveal-item">
+            <div class="dash-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">app.flint.africa</span></div>
+            <div class="dash-body">
+              <div class="dash-nav">
+                <span>Chats</span>
+                <span class="active">Business details</span>
+                <span>Team &amp; numbers</span>
+                <span>Billing</span>
+              </div>
+              <div class="dash-main">
+                <h5>Business details</h5>
+                <div class="biz-row"><div><span class="label">Hours</span>Mon&ndash;Sat, 7am&ndash;5pm</div><span class="mono" style="color:var(--accent)">Edit</span></div>
+                <div class="biz-row"><div><span class="label">Call-out fee</span>R350</div><span class="mono" style="color:var(--accent)">Edit</span></div>
+                <div class="biz-row"><div><span class="label">Areas covered</span>Soweto, Roodepoort, Joburg South</div><span class="mono" style="color:var(--accent)">Edit</span></div>
+                <div class="biz-row"><div><span class="label">Who gets handed tricky chats</span>Sipho &middot; 082 000 0001</div><span class="mono" style="color:var(--accent)">Edit</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="laptop-base"></div>
     </div>
   </section>
 
@@ -658,8 +687,6 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
   <section id="pricing" class="wrap">
     <div class="section-head reveal">
       <div class="eyebrow">Pricing</div>
-      <h2>Early access pricing for the WhatsApp Business Assistant.</h2>
-      <p>Flint is early. These are the prices our first customers pay, locked in for your first six months. Try any plan free for 7 days, then cancel any time.</p>
     </div>
 
     <div class="pricing-grid reveal-stagger">
@@ -721,21 +748,15 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
       </div>
     </div>
 
-    <div class="fees-note">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="5" r="0.9" fill="currentColor"/></svg>
-      <span>Every plan starts with a free 7-day trial &mdash; you only pay once you decide to keep it. Then there's a once-off R499 setup fee, which covers a friendly chat about your business, getting your first answers written up and approved by you, and switching everything on safely.</span>
-    </div>
-    <div class="fees-note">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="5" r="0.9" fill="currentColor"/></svg>
-      <span>Plans cover Flint. WhatsApp's own messaging fees from Meta are billed separately, pass-through at cost &mdash; typically a few rand a month at these volumes, since the first 1,000 messages each month are free.</span>
-    </div>
-
-    <div class="enterprise-row">
-      <div>
-        <h4>Need more than this?</h4>
-        <p>More numbers, higher volume, multiple locations, or a custom integration &mdash; let's talk about what you need and price it properly.</p>
+    <div class="fees-card reveal">
+      <div class="fees-row">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="5" r="0.9" fill="currentColor"/></svg>
+        <span>Every plan starts with a <strong>free 7-day trial</strong> &mdash; you only pay once you decide to keep it. Then there's a <strong>once-off R499 setup fee</strong>, which covers a friendly chat about your business, getting your first answers written up and approved by you, and switching everything on safely.</span>
       </div>
-      <a class="btn btn-ghost" href="#contact">Talk to us</a>
+      <div class="fees-row">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="5" r="0.9" fill="currentColor"/></svg>
+        <span>Plans cover Flint. WhatsApp's own messaging fees from Meta are billed separately, <strong>pass-through at cost</strong> &mdash; typically a few rand a month at these volumes, since the first 1,000 messages each month are free.</span>
+      </div>
     </div>
   </section>
 
