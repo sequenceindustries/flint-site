@@ -96,8 +96,7 @@ section{padding-block:clamp(56px,9vw,104px)}
   padding-top:18px; border-top:1px solid var(--border);
 }
 .hero-proof b{color:var(--fg); font-weight:600}
-.hero-stage{position:relative; aspect-ratio:1/1; max-width:380px; margin-inline:auto}
-#spark{width:100%; height:100%; display:block}
+.hero-stage{display:flex; justify-content:center}
 
 /* platform split */
 .split{display:grid; grid-template-columns:1fr 64px 1fr; gap:24px; align-items:stretch}
@@ -196,9 +195,8 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
 .foot-links a:hover{color:var(--fg)}
 
 /* example conversation mockups */
-.demo-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px}
 .phone-frame{
-  max-width:270px; margin-inline:auto; background:#111318; border-radius:38px; padding:10px;
+  max-width:300px; width:100%; margin-inline:auto; background:#111318; border-radius:42px; padding:11px;
   box-shadow:0 24px 48px -16px rgba(10,10,20,.4), 0 0 0 1px rgba(0,0,0,.06);
 }
 .phone-screen{background:var(--chatbg); border-radius:28px; overflow:hidden; position:relative; display:flex; flex-direction:column}
@@ -211,7 +209,7 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
 .phone-head .who b{font-size:13px; display:block}
 .phone-head .who span{font-size:10.5px; color:var(--good)}
 .phone-head .spacer{margin-left:auto; display:flex; gap:12px; color:var(--muted)}
-.phone-body{padding:14px 12px; display:flex; flex-direction:column; gap:9px; background:var(--chatbg); height:336px; overflow-y:auto; scrollbar-width:none}
+.phone-body{padding:14px 12px; display:flex; flex-direction:column; gap:9px; background:var(--chatbg); height:460px; overflow-y:auto; scrollbar-width:none}
 .phone-body::-webkit-scrollbar{display:none}
 .phone-home{height:18px; display:flex; align-items:center; justify-content:center; background:var(--chatbg)}
 .phone-home::after{content:""; width:94px; height:4px; border-radius:3px; background:var(--muted-2); opacity:.6}
@@ -228,7 +226,14 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
 .bubble.typing span:nth-child(2){animation-delay:.2s}
 .bubble.typing span:nth-child(3){animation-delay:.4s}
 @keyframes typingDot{0%,60%,100%{transform:translateY(0); opacity:.4} 30%{transform:translateY(-4px); opacity:1}}
-.demo-tag{font-size:12px; color:var(--muted-2); margin-top:10px}
+
+/* demo split: a phone mockup paired with copy, reused across the page */
+.demo-split{display:grid; grid-template-columns:1.1fr .9fr; gap:48px; align-items:center}
+.demo-split.reverse .demo-copy{order:2}
+.demo-split.reverse .demo-phone{order:1}
+.demo-copy h2{margin-top:6px}
+.demo-copy p{color:var(--muted); margin-top:14px; max-width:46ch}
+.demo-phone{display:flex; justify-content:center}
 
 /* dashboard mockup */
 .dash-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px}
@@ -259,19 +264,20 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
   .navlinks, .navcta .btn-ghost{display:none}
   .menu-toggle{display:block}
   .hero-grid{grid-template-columns:1fr}
-  .hero-stage{order:-1; max-width:220px}
+  .hero-stage{order:-1}
+  .hero-stage .phone-frame{max-width:240px}
   .split{grid-template-columns:1fr}
   .split-arrow{display:none}
   .steps{grid-template-columns:1fr 1fr}
   .why-grid{grid-template-columns:1fr}
   .pricing-grid{grid-template-columns:1fr}
-  .demo-grid{grid-template-columns:1fr}
   .dash-grid{grid-template-columns:1fr}
   .dash-body{grid-template-columns:92px 1fr}
   .cta-band{flex-direction:column; align-items:flex-start}
-}
-@media (max-width:1140px) and (min-width:861px){
-  .demo-grid{grid-template-columns:1fr 1fr}
+  .demo-split{grid-template-columns:1fr; gap:28px}
+  .demo-split .demo-phone{order:-1}
+  .demo-split.reverse .demo-copy{order:2}
+  .demo-split.reverse .demo-phone{order:-1}
 }
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
@@ -308,7 +314,43 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
         </div>
         <div class="hero-proof"><span class="plan-badge trial"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> 7-day free trial</span> &mdash; no card needed to get started.</div>
       </div>
-      <div class="hero-stage"><canvas id="spark" width="380" height="380" aria-hidden="true"></canvas></div>
+      <div class="hero-stage">
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <div class="phone-notch"></div>
+            <div class="phone-status">
+              <span>9:41</span>
+              <div class="icons">
+                <svg width="15" height="10" viewBox="0 0 15 10" fill="currentColor"><rect x="0" y="6" width="2.5" height="4" rx="0.5"/><rect x="4" y="4" width="2.5" height="6" rx="0.5"/><rect x="8" y="2" width="2.5" height="8" rx="0.5"/><rect x="12" y="0" width="2.5" height="10" rx="0.5"/></svg>
+                <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 3.5C4.5 0.2 9.5 0.2 13 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M3.3 6C5.4 4 8.6 4 10.7 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="7" cy="8.6" r="1.1" fill="currentColor"/></svg>
+                <svg width="22" height="11" viewBox="0 0 22 11" fill="none"><rect x="0.5" y="0.5" width="18" height="10" rx="2.5" stroke="currentColor"/><rect x="2" y="2" width="15" height="7" rx="1.2" fill="currentColor"/><rect x="19.5" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+              </div>
+            </div>
+            <div class="phone-head">
+              <svg class="back" width="9" height="15" viewBox="0 0 9 15" fill="none"><path d="M7.5 1.5L1 7.5l6.5 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div class="avatar">SC</div>
+              <div class="who"><b>snapcash</b><span>online</span></div>
+              <div class="spacer">
+                <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><rect x="0" y="1" width="10" height="10" rx="2"/><path d="M11 4.2 15 1.5v9l-4-2.7Z"/></svg>
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M1 2c0-.6.4-1 1-1h1.6c.5 0 .9.3 1 .8l.6 2.1c.1.4 0 .8-.3 1L3.6 6c.8 1.6 2 2.8 3.6 3.6l1.1-1.3c.3-.3.7-.4 1-.3l2.1.6c.5.1.8.5.8 1V11c0 .6-.4 1-1 1C6 12 1 7 1 2Z"/></svg>
+              </div>
+            </div>
+            <div class="phone-body">
+              <div class="bubble-row in"><div class="bubble">Hi, I'd like to apply for a loan</div><div class="bubble-time">11:02</div></div>
+              <div class="bubble-row out"><div class="bubble">Hi! Happy to help. Before we start &mdash; do you consent to us using your details to process this application? Reply YES or NO.</div><div class="bubble-time">11:02</div></div>
+              <div class="bubble-row in"><div class="bubble">Yes</div><div class="bubble-time">11:03</div></div>
+              <div class="bubble-row out"><div class="bubble">Great. What's your full name?</div><div class="bubble-time">11:03</div></div>
+              <div class="bubble-row in"><div class="bubble">Thabo Mokoena</div><div class="bubble-time">11:03</div></div>
+              <div class="bubble-row out"><div class="bubble">Thanks Thabo. How much would you like to borrow, and over how many days?</div><div class="bubble-time">11:04</div></div>
+              <div class="bubble-row in"><div class="bubble">R1 000, over 10 days</div><div class="bubble-time">11:04</div></div>
+              <div class="bubble-row out"><div class="bubble">Please send a photo of your ID and a recent payslip to finish your application.</div><div class="bubble-time">11:04</div></div>
+              <div class="bubble-row in"><div class="bubble">[2 photos sent]</div><div class="bubble-time">11:05</div></div>
+              <div class="bubble-row out"><div class="bubble">Got both documents &mdash; your application is complete. Our team will review it and come back to you shortly.</div><div class="bubble-time">11:05</div></div>
+            </div>
+            <div class="phone-home"></div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -359,13 +401,13 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
   </section>
 
   <section class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">See it in action</div>
-      <h2>What a customer actually experiences.</h2>
-      <p>Three example conversations, shown end to end &mdash; from the first message to the customer's details being ready for the business to follow up on.</p>
-    </div>
-    <div class="demo-grid">
-      <div>
+    <div class="demo-split">
+      <div class="demo-copy">
+        <div class="eyebrow">See it in action</div>
+        <h2>A dripping tap, sorted without a phone call.</h2>
+        <p>Flint asks the right follow-up questions, quotes the call-out fee the business has approved, and hands the job to the right person &mdash; all inside the chat the customer already started.</p>
+      </div>
+      <div class="demo-phone">
         <div class="phone-frame">
           <div class="phone-screen">
             <div class="phone-notch"></div>
@@ -393,78 +435,6 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
               <div class="bubble-row out"><div class="bubble">Great, we cover Roodepoort. What is leaking, and where in the house?</div><div class="bubble-time">09:15</div></div>
               <div class="bubble-row in"><div class="bubble">Kitchen tap, a bit under the sink too</div><div class="bubble-time">09:16</div></div>
               <div class="bubble-row out"><div class="bubble">Got it. Our call-out fee is R350, which covers the visit and a diagnosis. I've passed this to Sipho &mdash; he'll confirm a time within the hour.</div><div class="bubble-time">09:16</div></div>
-            </div>
-            <div class="phone-home"></div>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <div class="phone-frame">
-          <div class="phone-screen">
-            <div class="phone-notch"></div>
-            <div class="phone-status">
-              <span>9:41</span>
-              <div class="icons">
-                <svg width="15" height="10" viewBox="0 0 15 10" fill="currentColor"><rect x="0" y="6" width="2.5" height="4" rx="0.5"/><rect x="4" y="4" width="2.5" height="6" rx="0.5"/><rect x="8" y="2" width="2.5" height="8" rx="0.5"/><rect x="12" y="0" width="2.5" height="10" rx="0.5"/></svg>
-                <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 3.5C4.5 0.2 9.5 0.2 13 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M3.3 6C5.4 4 8.6 4 10.7 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="7" cy="8.6" r="1.1" fill="currentColor"/></svg>
-                <svg width="22" height="11" viewBox="0 0 22 11" fill="none"><rect x="0.5" y="0.5" width="18" height="10" rx="2.5" stroke="currentColor"/><rect x="2" y="2" width="15" height="7" rx="1.2" fill="currentColor"/><rect x="19.5" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
-              </div>
-            </div>
-            <div class="phone-head">
-              <svg class="back" width="9" height="15" viewBox="0 0 9 15" fill="none"><path d="M7.5 1.5L1 7.5l6.5 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <div class="avatar">SC</div>
-              <div class="who"><b>snapcash</b><span>online</span></div>
-              <div class="spacer">
-                <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><rect x="0" y="1" width="10" height="10" rx="2"/><path d="M11 4.2 15 1.5v9l-4-2.7Z"/></svg>
-                <svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M1 2c0-.6.4-1 1-1h1.6c.5 0 .9.3 1 .8l.6 2.1c.1.4 0 .8-.3 1L3.6 6c.8 1.6 2 2.8 3.6 3.6l1.1-1.3c.3-.3.7-.4 1-.3l2.1.6c.5.1.8.5.8 1V11c0 .6-.4 1-1 1C6 12 1 7 1 2Z"/></svg>
-              </div>
-            </div>
-            <div class="phone-body">
-              <div class="bubble-row in"><div class="bubble">Hi, I'd like to apply for a loan</div><div class="bubble-time">11:02</div></div>
-              <div class="bubble-row out"><div class="bubble">Hi! Happy to help. Before we start &mdash; do you consent to us using your details to process this application? Reply YES or NO.</div><div class="bubble-time">11:02</div></div>
-              <div class="bubble-row in"><div class="bubble">Yes</div><div class="bubble-time">11:03</div></div>
-              <div class="bubble-row out"><div class="bubble">Great. What's your full name?</div><div class="bubble-time">11:03</div></div>
-              <div class="bubble-row in"><div class="bubble">Thabo Mokoena</div><div class="bubble-time">11:03</div></div>
-              <div class="bubble-row out"><div class="bubble">Thanks Thabo. How much would you like to borrow, and over how many days?</div><div class="bubble-time">11:04</div></div>
-              <div class="bubble-row in"><div class="bubble">R1 000, over 10 days</div><div class="bubble-time">11:04</div></div>
-              <div class="bubble-row out"><div class="bubble">Please send a photo of your ID and a recent payslip to finish your application.</div><div class="bubble-time">11:04</div></div>
-              <div class="bubble-row in"><div class="bubble">[2 photos sent]</div><div class="bubble-time">11:05</div></div>
-              <div class="bubble-row out"><div class="bubble">Got both documents &mdash; your application is complete. Our team will review it and come back to you shortly.</div><div class="bubble-time">11:05</div></div>
-            </div>
-            <div class="phone-home"></div>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <div class="phone-frame">
-          <div class="phone-screen">
-            <div class="phone-notch"></div>
-            <div class="phone-status">
-              <span>9:41</span>
-              <div class="icons">
-                <svg width="15" height="10" viewBox="0 0 15 10" fill="currentColor"><rect x="0" y="6" width="2.5" height="4" rx="0.5"/><rect x="4" y="4" width="2.5" height="6" rx="0.5"/><rect x="8" y="2" width="2.5" height="8" rx="0.5"/><rect x="12" y="0" width="2.5" height="10" rx="0.5"/></svg>
-                <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 3.5C4.5 0.2 9.5 0.2 13 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M3.3 6C5.4 4 8.6 4 10.7 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="7" cy="8.6" r="1.1" fill="currentColor"/></svg>
-                <svg width="22" height="11" viewBox="0 0 22 11" fill="none"><rect x="0.5" y="0.5" width="18" height="10" rx="2.5" stroke="currentColor"/><rect x="2" y="2" width="15" height="7" rx="1.2" fill="currentColor"/><rect x="19.5" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
-              </div>
-            </div>
-            <div class="phone-head">
-              <svg class="back" width="9" height="15" viewBox="0 0 9 15" fill="none"><path d="M7.5 1.5L1 7.5l6.5 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <div class="avatar">SH</div>
-              <div class="who"><b>Sparkle Home Cleaning</b><span>online</span></div>
-              <div class="spacer">
-                <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><rect x="0" y="1" width="10" height="10" rx="2"/><path d="M11 4.2 15 1.5v9l-4-2.7Z"/></svg>
-                <svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M1 2c0-.6.4-1 1-1h1.6c.5 0 .9.3 1 .8l.6 2.1c.1.4 0 .8-.3 1L3.6 6c.8 1.6 2 2.8 3.6 3.6l1.1-1.3c.3-.3.7-.4 1-.3l2.1.6c.5.1.8.5.8 1V11c0 .6-.4 1-1 1C6 12 1 7 1 2Z"/></svg>
-              </div>
-            </div>
-            <div class="phone-body">
-              <div class="bubble-row in"><div class="bubble">Hi, do you clean in Sandton? Need a once-off deep clean before I move out</div><div class="bubble-time">14:02</div></div>
-              <div class="bubble-row out"><div class="bubble">Yes, we clean homes in Sandton. How many bedrooms does the home have?</div><div class="bubble-time">14:02</div></div>
-              <div class="bubble-row in"><div class="bubble">3 bedrooms</div><div class="bubble-time">14:03</div></div>
-              <div class="bubble-row out"><div class="bubble">Any extras, like windows, oven or fridge? Reply NONE if not.</div><div class="bubble-time">14:03</div></div>
-              <div class="bubble-row in"><div class="bubble">Oven and windows please</div><div class="bubble-time">14:04</div></div>
-              <div class="bubble-row out"><div class="bubble">Perfect &mdash; I've sent this through to Nomvula, and she'll confirm pricing and a time with you shortly.</div><div class="bubble-time">14:04</div></div>
             </div>
             <div class="phone-home"></div>
           </div>
@@ -515,6 +485,49 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
             <div class="biz-row"><div><span class="label">Who gets handed tricky chats</span>Sipho &middot; 082 000 0001</div><span class="mono" style="color:var(--accent)">Edit</span></div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="demo-split reverse">
+      <div class="demo-phone">
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <div class="phone-notch"></div>
+            <div class="phone-status">
+              <span>9:41</span>
+              <div class="icons">
+                <svg width="15" height="10" viewBox="0 0 15 10" fill="currentColor"><rect x="0" y="6" width="2.5" height="4" rx="0.5"/><rect x="4" y="4" width="2.5" height="6" rx="0.5"/><rect x="8" y="2" width="2.5" height="8" rx="0.5"/><rect x="12" y="0" width="2.5" height="10" rx="0.5"/></svg>
+                <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 3.5C4.5 0.2 9.5 0.2 13 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M3.3 6C5.4 4 8.6 4 10.7 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="7" cy="8.6" r="1.1" fill="currentColor"/></svg>
+                <svg width="22" height="11" viewBox="0 0 22 11" fill="none"><rect x="0.5" y="0.5" width="18" height="10" rx="2.5" stroke="currentColor"/><rect x="2" y="2" width="15" height="7" rx="1.2" fill="currentColor"/><rect x="19.5" y="3.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+              </div>
+            </div>
+            <div class="phone-head">
+              <svg class="back" width="9" height="15" viewBox="0 0 9 15" fill="none"><path d="M7.5 1.5L1 7.5l6.5 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div class="avatar">SH</div>
+              <div class="who"><b>Sparkle Home Cleaning</b><span>online</span></div>
+              <div class="spacer">
+                <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><rect x="0" y="1" width="10" height="10" rx="2"/><path d="M11 4.2 15 1.5v9l-4-2.7Z"/></svg>
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M1 2c0-.6.4-1 1-1h1.6c.5 0 .9.3 1 .8l.6 2.1c.1.4 0 .8-.3 1L3.6 6c.8 1.6 2 2.8 3.6 3.6l1.1-1.3c.3-.3.7-.4 1-.3l2.1.6c.5.1.8.5.8 1V11c0 .6-.4 1-1 1C6 12 1 7 1 2Z"/></svg>
+              </div>
+            </div>
+            <div class="phone-body">
+              <div class="bubble-row in"><div class="bubble">Hi, do you clean in Sandton? Need a once-off deep clean before I move out</div><div class="bubble-time">14:02</div></div>
+              <div class="bubble-row out"><div class="bubble">Yes, we clean homes in Sandton. How many bedrooms does the home have?</div><div class="bubble-time">14:02</div></div>
+              <div class="bubble-row in"><div class="bubble">3 bedrooms</div><div class="bubble-time">14:03</div></div>
+              <div class="bubble-row out"><div class="bubble">Any extras, like windows, oven or fridge? Reply NONE if not.</div><div class="bubble-time">14:03</div></div>
+              <div class="bubble-row in"><div class="bubble">Oven and windows please</div><div class="bubble-time">14:04</div></div>
+              <div class="bubble-row out"><div class="bubble">Perfect &mdash; I've sent this through to Nomvula, and she'll confirm pricing and a time with you shortly.</div><div class="bubble-time">14:04</div></div>
+            </div>
+            <div class="phone-home"></div>
+          </div>
+        </div>
+      </div>
+      <div class="demo-copy">
+        <div class="eyebrow">See it in action</div>
+        <h2>Booking enquiries, qualified before they reach you.</h2>
+        <p>Flint gathers the details a quote actually needs &mdash; size, extras, location &mdash; then passes a ready-to-quote lead straight to the team member who handles it.</p>
       </div>
     </div>
   </section>
@@ -696,111 +709,6 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
   });
 })();
 
-// --- spark canvas: gentle ember particles rising from a struck flint, respects reduced motion ---
-(function(){
-  var canvas = document.getElementById('spark');
-  if (!canvas) return;
-  var ctx = canvas.getContext('2d');
-  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var W = canvas.width, H = canvas.height;
-  var styles = getComputedStyle(document.documentElement);
-  function cssVar(name){ return styles.getPropertyValue(name).trim() || '#4f46e5'; }
-  var accent = cssVar('--accent'), accent2 = cssVar('--accent-2');
-
-  // two facing stones meeting at a single strike point; local coords, pre-rotation
-  var ORIGIN_X = W/2, ORIGIN_Y = H*0.6, ROT = -0.16;
-  var STRIKE_LOCAL = {x: 4, y: -42};
-  function toScreen(lx, ly){
-    var c = Math.cos(ROT), s = Math.sin(ROT);
-    return { x: ORIGIN_X + (lx*c - ly*s), y: ORIGIN_Y + (lx*s + ly*c) };
-  }
-  var strike = toScreen(STRIKE_LOCAL.x, STRIKE_LOCAL.y);
-
-  function drawFlint(){
-    ctx.save();
-    ctx.translate(ORIGIN_X, ORIGIN_Y);
-    ctx.rotate(ROT);
-    // lower stone (struck piece), cool charcoal with a lit top edge
-    var grad = ctx.createLinearGradient(-60,-50,40,40);
-    grad.addColorStop(0, 'rgba(190,200,255,0.20)');
-    grad.addColorStop(0.35, 'rgba(45,46,62,0.9)');
-    grad.addColorStop(1, 'rgba(18,18,26,0.95)');
-    ctx.fillStyle = grad;
-    ctx.beginPath();
-    ctx.moveTo(-70,-8); ctx.lineTo(STRIKE_LOCAL.x,STRIKE_LOCAL.y); ctx.lineTo(62,-4); ctx.lineTo(18,42); ctx.lineTo(-58,24); ctx.closePath();
-    ctx.fill();
-    ctx.strokeStyle = 'rgba(230,233,245,0.22)'; ctx.lineWidth = 1.5; ctx.stroke();
-    // bright lit facet right at the strike edge
-    ctx.beginPath();
-    ctx.moveTo(-28,-20); ctx.lineTo(STRIKE_LOCAL.x,STRIKE_LOCAL.y); ctx.lineTo(28,-14);
-    ctx.strokeStyle = 'rgba(200,215,255,0.6)'; ctx.lineWidth = 2; ctx.stroke();
-    ctx.restore();
-  }
-
-  function drawFlash(t){
-    // t: 0..1 pulse, brightest near 0
-    var r = 10 + t*26;
-    var g = ctx.createRadialGradient(strike.x, strike.y, 0, strike.x, strike.y, r);
-    var a = Math.max(0, 1 - t);
-    g.addColorStop(0, 'rgba(240,245,255,' + (0.95*a) + ')');
-    g.addColorStop(0.3, 'rgba(99,102,241,' + (0.55*a) + ')');
-    g.addColorStop(1, 'rgba(14,165,233,0)');
-    ctx.fillStyle = g;
-    ctx.beginPath(); ctx.arc(strike.x, strike.y, r, 0, Math.PI*2); ctx.fill();
-  }
-
-  var particles = [];
-  var flashPhase = 0; // 0..1 looping
-  function spawn(){
-    var ang = -Math.PI/2 + (Math.random()-0.5)*1.5; // mostly upward, wide cone
-    var speed = 0.7 + Math.random()*1.5;
-    particles.push({
-      x: strike.x + (Math.random()-0.5)*6, y: strike.y + (Math.random()-0.5)*6,
-      vx: Math.cos(ang)*speed, vy: Math.sin(ang)*speed,
-      r: 1 + Math.random()*2.4,
-      life: 0, maxLife: 36 + Math.random()*54,
-      color: Math.random() > 0.45 ? accent : accent2,
-    });
-  }
-
-  function tick(){
-    ctx.clearRect(0,0,W,H);
-    drawFlint();
-    flashPhase += 0.012;
-    if (flashPhase > 1) flashPhase = 0;
-    // periodic bright strike flash, with a cluster of sparks released each pulse
-    var pulseT = flashPhase < 0.25 ? flashPhase / 0.25 : 1;
-    drawFlash(pulseT);
-    if (!reduced){
-      if (flashPhase < 0.03 && particles.length < 90){
-        for (var k=0;k<6;k++) spawn();
-      }
-      if (Math.random() < 0.12 && particles.length < 90) spawn();
-    }
-    for (var i = particles.length - 1; i >= 0; i--){
-      var p = particles[i];
-      p.x += p.vx; p.y += p.vy; p.vy -= 0.006; p.vx *= 0.995; p.life++;
-      var t = p.life / p.maxLife;
-      if (t >= 1){ particles.splice(i,1); continue; }
-      var fade = Math.max(0, 1 - t);
-      ctx.globalAlpha = fade;
-      ctx.fillStyle = t < 0.2 ? '#eef2ff' : p.color;
-      ctx.beginPath(); ctx.arc(p.x, p.y, p.r * (1 - t*0.4), 0, Math.PI*2); ctx.fill();
-    }
-    ctx.globalAlpha = 1;
-    if (!reduced) requestAnimationFrame(tick);
-  }
-  tick();
-  if (reduced){
-    for (var i=0;i<22;i++) spawn();
-    var once = function(){
-      ctx.clearRect(0,0,W,H); drawFlint(); drawFlash(0.3);
-      particles.forEach(function(p){ ctx.globalAlpha=0.7; ctx.fillStyle=p.color; ctx.beginPath(); ctx.arc(p.x,p.y+ (p.life*0.3),p.r,0,Math.PI*2); ctx.fill(); });
-      ctx.globalAlpha = 1;
-    };
-    once();
-  }
-})();
 
 /* animated demo chats */
 (function(){
