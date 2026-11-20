@@ -8,7 +8,7 @@
 :root{
   --bg:#f7f7fb; --surface:#ffffff; --surface-2:#eef0f7; --border:#e1e3ee;
   --fg:#14151d; --muted:#5a5e70; --muted-2:#888da0;
-  --accent:#4f46e5; --accent-2:#0ea5e9; --accent-3:#c026d3; --accent-fg:#ffffff;
+  --accent:#0f766e; --accent-2:#ea580c; --accent-3:#be123c; --accent-fg:#ffffff;
   --mono:#3c3f4d;
   --good:#16915a; --warn:#b4601a;
   --chatbg:#eef1f6;
@@ -19,7 +19,7 @@
   :root:not([data-theme="light"]){
     --bg:#0d0e14; --surface:#15161f; --surface-2:#1c1e2a; --border:#2a2c3b;
     --fg:#f1f2f8; --muted:#a2a6b8; --muted-2:#767a8d;
-    --accent:#6366f1; --accent-2:#38bdf8; --accent-3:#e879f9; --accent-fg:#0b0c12;
+    --accent:#2dd4bf; --accent-2:#fb923c; --accent-3:#fb7185; --accent-fg:#0b0c12;
     --mono:#c6c9da;
     --good:#34d399; --warn:#f0a63c;
     --chatbg:#11141c;
@@ -29,7 +29,7 @@
 :root[data-theme="dark"]{
   --bg:#0d0e14; --surface:#15161f; --surface-2:#1c1e2a; --border:#2a2c3b;
   --fg:#f1f2f8; --muted:#a2a6b8; --muted-2:#767a8d;
-  --accent:#6366f1; --accent-2:#38bdf8; --accent-3:#e879f9; --accent-fg:#0b0c12;
+  --accent:#2dd4bf; --accent-2:#fb923c; --accent-3:#fb7185; --accent-fg:#0b0c12;
   --mono:#c6c9da;
   --good:#34d399; --warn:#f0a63c;
   --chatbg:#11141c;
@@ -82,7 +82,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .menu-toggle{display:none; background:none; border:1px solid var(--border); border-radius:8px; width:40px; height:40px; color:var(--fg); font-size:18px}
 
 main{display:block}
-section{padding-block:clamp(56px,9vw,104px)}
+section{padding-block:clamp(28px,4.5vw,52px)}
 .section-head{max-width:680px; margin-bottom:40px; display:flex; flex-direction:column; gap:14px}
 .section-head h2{font-size:clamp(26px,4vw,38px)}
 .section-head p{color:var(--muted); font-size:17px}
@@ -148,7 +148,9 @@ section{padding-block:clamp(56px,9vw,104px)}
 .plan.featured:hover{box-shadow:0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent), 0 22px 40px -22px rgba(20,20,40,.3)}
 .plan.pro li svg{color:var(--accent-3)}
 .plan.pro .btn-ghost{border-color:color-mix(in srgb, var(--accent-3) 50%, var(--border)); color:var(--accent-3)}
-.plan .pill{position:absolute; top:-12px; left:28px; background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:var(--accent-fg); font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:5px 12px; border-radius:99px}
+.plan .pill{position:absolute; top:-12px; left:28px; background:linear-gradient(110deg,var(--accent),var(--accent-2),var(--accent)); background-size:220% 100%; animation:pillShift 5s ease-in-out infinite; color:var(--accent-fg); font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:5px 12px; border-radius:99px}
+@keyframes pillShift{0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%}}
+@media (prefers-reduced-motion:reduce){.plan .pill{animation:none}}
 .plan h3{font-size:19px}
 .plan-badges{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px}
 .plan-badge{font-size:12.5px; font-weight:700; letter-spacing:.01em; padding:7px 13px; border-radius:99px; display:inline-flex; align-items:center; gap:6px; line-height:1}
@@ -166,9 +168,10 @@ section{padding-block:clamp(56px,9vw,104px)}
 .fees-card{
   margin-top:32px; border-radius:16px; border:1px solid var(--border); background:var(--surface-2); overflow:hidden;
 }
-.fees-card .fees-row{display:flex; gap:12px; padding:18px 22px; font-size:13.5px; color:var(--muted); align-items:flex-start}
+.fees-card .fees-row{display:flex; flex-direction:column; align-items:center; text-align:center; gap:8px; padding:20px 28px; font-size:13.5px; color:var(--muted)}
 .fees-card .fees-row+.fees-row{border-top:1px solid var(--border)}
-.fees-card svg{flex:none; margin-top:3px; color:var(--accent-2)}
+.fees-card .fees-row span{max-width:62ch}
+.fees-card svg{flex:none; color:var(--accent-2)}
 .fees-card strong{color:var(--fg); font-weight:600}
 
 /* faq */
@@ -246,7 +249,7 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
 .phone-frame::before{top:92px; width:3px; height:28px; box-shadow:0 44px 0 #1a1b22}
 .phone-frame::after{top:150px; width:3px; height:46px}
 .phone-side-btn{position:absolute; right:-3px; top:120px; width:3px; height:58px; background:linear-gradient(#2c2e39,#1a1b22); border-radius:0 3px 3px 0}
-.phone-screen{background:var(--chatbg); border-radius:36px; overflow:hidden; position:relative; display:flex; flex-direction:column; box-shadow:0 0 0 2px rgba(0,0,0,.5) inset}
+.phone-screen{background:var(--chatbg); border-radius:36px; overflow:hidden; position:relative; display:flex; flex-direction:column}
 .phone-notch{position:absolute; top:9px; left:50%; transform:translateX(-50%); width:94px; height:26px; background:#0a0a0d; border-radius:999px; z-index:3; display:flex; align-items:center; justify-content:flex-end; padding-right:10px}
 .phone-notch::after{content:""; width:8px; height:8px; border-radius:50%; background:#1c2230; box-shadow:0 0 0 1.5px rgba(120,140,200,.25) inset}
 .phone-status{display:flex; justify-content:space-between; align-items:center; padding:13px 20px 2px; font-size:11.5px; font-weight:600; color:var(--fg)}
@@ -257,7 +260,13 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
 .phone-head .avatar.c2{background:linear-gradient(135deg,var(--accent-2),var(--accent-3))}
 .phone-head .avatar.c3{background:linear-gradient(135deg,var(--accent-3),var(--accent))}
 .phone-head .who b{font-size:13px; display:block}
-.phone-head .who span{font-size:10.5px; color:var(--good)}
+.phone-head .who span{font-size:10.5px; color:var(--good); position:relative; padding-left:11px}
+.phone-head .who span::before{content:""; position:absolute; left:0; top:50%; transform:translateY(-50%); width:6px; height:6px; border-radius:50%; background:var(--good); animation:pulseDot 2s infinite}
+@keyframes pulseDot{
+  0%{box-shadow:0 0 0 0 color-mix(in srgb, var(--good) 45%, transparent)}
+  70%{box-shadow:0 0 0 6px transparent}
+  100%{box-shadow:0 0 0 0 transparent}
+}
 .phone-head .spacer{margin-left:auto; display:flex; gap:12px; color:var(--muted)}
 .phone-body{padding:14px 12px; display:flex; flex-direction:column; gap:9px; background:var(--chatbg); height:460px; overflow-y:auto; scrollbar-width:none}
 .phone-body::-webkit-scrollbar{display:none}
@@ -285,38 +294,47 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
 .demo-copy h2{margin-top:6px}
 .demo-copy p{color:var(--muted); margin-top:14px; max-width:46ch}
 .demo-phone{display:flex; justify-content:center}
+.demo-phone, .hero-stage{animation:phoneFloat 6s ease-in-out infinite}
+.demo-split.reverse .demo-phone{animation-delay:-3s}
+@keyframes phoneFloat{0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)}}
+@media (prefers-reduced-motion:reduce){
+  .demo-phone, .hero-stage{animation:none}
+}
 
 /* dashboard mockup, shown inside a laptop frame */
-.laptop-frame{max-width:920px; margin-inline:auto}
-.laptop-screen{
-  position:relative; background:linear-gradient(165deg,#2b2c33,#15151a 60%); border-radius:20px;
-  padding:18px 18px 22px; box-shadow:0 44px 90px -34px rgba(10,10,20,.45), 0 0 0 1px rgba(255,255,255,.05) inset;
+.laptop-frame{max-width:860px; margin-inline:auto; transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.laptop-frame:hover{transform:translateY(-6px)}
+.laptop-lid{
+  position:relative; background:linear-gradient(170deg,#3d3e46,#1a1a1f 65%);
+  border-radius:16px 16px 5px 5px; padding:14px 14px 9px;
+  box-shadow:0 46px 90px -36px rgba(10,10,20,.5), 0 0 0 1px rgba(255,255,255,.05) inset;
 }
-.laptop-screen::before{
-  content:""; position:absolute; top:7px; left:50%; transform:translateX(-50%); width:6px; height:6px;
-  border-radius:50%; background:#000; box-shadow:0 0 0 1.5px rgba(255,255,255,.1);
+.laptop-lid::before{
+  content:""; position:absolute; top:5px; left:50%; transform:translateX(-50%); width:5px; height:5px;
+  border-radius:50%; background:#000; box-shadow:0 0 0 1px rgba(255,255,255,.08);
 }
-.laptop-screen .dash-grid{background:var(--bg); border-radius:12px; padding:22px}
+.laptop-screen{background:#050506; border-radius:7px; padding:3px; box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)}
+.laptop-screen .dash-app{background:var(--bg); border-radius:4px; overflow:hidden}
+.laptop-hinge{height:8px; background:linear-gradient(180deg,#232329,#121214)}
 .laptop-base{
-  height:20px; margin:0 -14px; position:relative;
-  background:linear-gradient(180deg,#34353c,#191a1e); border-radius:0 0 12px 12px;
-  box-shadow:0 6px 14px -6px rgba(0,0,0,.4);
+  height:18px; margin:0 -10px; position:relative;
+  background:linear-gradient(180deg,#e4e5e9,#c3c4cb); border-radius:0 0 13px 13px;
+  box-shadow:0 10px 20px -12px rgba(20,20,30,.5);
 }
-.laptop-base::after{
-  content:""; position:absolute; left:50%; top:0; transform:translateX(-50%); width:150px; height:8px;
-  background:#0c0c0e; border-radius:0 0 10px 10px;
+.laptop-base::before{
+  content:""; position:absolute; left:50%; top:0; transform:translateX(-50%); width:130px; height:5px;
+  background:#0d0d0f; border-radius:0 0 7px 7px;
 }
-.dash-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px}
-.dash-mock{background:var(--surface); border:1px solid var(--border); border-radius:16px; overflow:hidden; transition:transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s ease}
-.dash-mock:hover{transform:translateY(-5px); box-shadow:0 20px 36px -22px rgba(20,20,40,.25)}
+.dash-app{display:flex; flex-direction:column}
 .dash-top{display:flex; align-items:center; gap:7px; padding:10px 14px; background:var(--surface-2); border-bottom:1px solid var(--border)}
 .dash-top .dot{width:8px; height:8px; border-radius:50%; background:var(--border)}
 .dash-top .url{margin-left:8px; font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--muted-2); background:var(--bg); padding:3px 10px; border-radius:99px}
-.dash-body{display:grid; grid-template-columns:118px 1fr; min-height:260px}
+.dash-layout{display:grid; grid-template-columns:128px 1fr 1fr; min-height:320px}
 .dash-nav{background:var(--surface-2); border-right:1px solid var(--border); padding:14px 8px; display:flex; flex-direction:column; gap:4px}
-.dash-nav span{display:block; padding:8px 10px; border-radius:8px; font-size:12px; color:var(--muted)}
+.dash-nav span{display:block; padding:8px 10px; border-radius:8px; font-size:12px; color:var(--muted); transition:background .2s ease, color .2s ease}
 .dash-nav span.active{background:var(--surface); color:var(--fg); font-weight:600; box-shadow:0 0 0 1px var(--border)}
 .dash-main{padding:16px}
+.dash-main.dash-list{border-right:1px solid var(--border)}
 .dash-main h5{font-family:'Montserrat',sans-serif; font-size:13px; margin-bottom:10px; color:var(--muted-2); text-transform:uppercase; letter-spacing:.06em}
 .convo-row{display:flex; gap:10px; align-items:center; padding:9px 6px; border-radius:8px; margin:0 -6px; transition:background .2s ease}
 .convo-row:hover{background:var(--surface-2)}
@@ -343,8 +361,9 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
   .steps{grid-template-columns:1fr 1fr}
   .why-grid{grid-template-columns:1fr}
   .pricing-grid{grid-template-columns:1fr}
-  .dash-grid{grid-template-columns:1fr}
-  .dash-body{grid-template-columns:92px 1fr}
+  .dash-layout{grid-template-columns:1fr}
+  .dash-nav{flex-direction:row; flex-wrap:wrap; border-right:none; border-bottom:1px solid var(--border)}
+  .dash-main.dash-list{border-right:none; border-bottom:1px solid var(--border)}
   .cta-band{flex-direction:column; align-items:flex-start}
   .demo-split{grid-template-columns:1fr; gap:28px}
   .demo-split .demo-phone{order:-1}
@@ -588,36 +607,25 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
       <p>No tech skills needed. One screen shows every conversation your customers have had, and another lets you update your hours, prices and answers whenever they change.</p>
     </div>
     <div class="laptop-frame reveal">
-      <div class="laptop-screen">
-        <div class="dash-grid reveal-stagger">
-          <div class="dash-mock reveal-item">
+      <div class="laptop-lid">
+        <div class="laptop-screen">
+          <div class="dash-app">
             <div class="dash-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">app.flint.africa</span></div>
-            <div class="dash-body">
+            <div class="dash-layout">
               <div class="dash-nav">
                 <span class="active">Chats</span>
                 <span>Business details</span>
                 <span>Team &amp; numbers</span>
                 <span>Billing</span>
               </div>
-              <div class="dash-main">
+              <div class="dash-main dash-list">
                 <h5>Chats</h5>
                 <div class="convo-row"><div class="av">TM</div><div class="meta"><b>Thabo M.</b><span>Kitchen tap, Roodepoort&hellip;</span></div><span class="status handled">Flint replied</span></div>
                 <div class="convo-row"><div class="av">LN</div><div class="meta"><b>Lerato N.</b><span>Can I get a refund on&hellip;</span></div><span class="status needs">Needs you</span></div>
                 <div class="convo-row"><div class="av">SK</div><div class="meta"><b>Sibusiso K.</b><span>3 bedroom, deep clean&hellip;</span></div><span class="status handled">Flint replied</span></div>
                 <div class="convo-row"><div class="av">AP</div><div class="meta"><b>Anele P.</b><span>Geyser is leaking, urgent&hellip;</span></div><span class="status needs">Needs you</span></div>
               </div>
-            </div>
-          </div>
-          <div class="dash-mock reveal-item">
-            <div class="dash-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">app.flint.africa</span></div>
-            <div class="dash-body">
-              <div class="dash-nav">
-                <span>Chats</span>
-                <span class="active">Business details</span>
-                <span>Team &amp; numbers</span>
-                <span>Billing</span>
-              </div>
-              <div class="dash-main">
+              <div class="dash-main dash-detail">
                 <h5>Business details</h5>
                 <div class="biz-row"><div><span class="label">Hours</span>Mon&ndash;Sat, 7am&ndash;5pm</div><span class="mono" style="color:var(--accent)">Edit</span></div>
                 <div class="biz-row"><div><span class="label">Call-out fee</span>R350</div><span class="mono" style="color:var(--accent)">Edit</span></div>
@@ -628,6 +636,7 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
           </div>
         </div>
       </div>
+      <div class="laptop-hinge"></div>
       <div class="laptop-base"></div>
     </div>
   </section>
