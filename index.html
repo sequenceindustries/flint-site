@@ -130,7 +130,7 @@ section{padding-block:clamp(56px,9vw,104px)}
 
 /* pricing */
 .pricing-note{display:flex; align-items:center; gap:8px; font-size:13px; color:var(--muted-2); margin-bottom:28px}
-.pricing-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:20px; align-items:stretch; max-width:760px; margin-inline:auto}
+.pricing-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; align-items:stretch; max-width:1080px; margin-inline:auto}
 .plan{
   background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:28px;
   display:flex; flex-direction:column; gap:18px; position:relative;
@@ -278,6 +278,9 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
   .demo-split .demo-phone{order:-1}
   .demo-split.reverse .demo-copy{order:2}
   .demo-split.reverse .demo-phone{order:-1}
+}
+@media (max-width:1140px) and (min-width:861px){
+  .pricing-grid{grid-template-columns:1fr 1fr; max-width:680px}
 }
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
@@ -605,6 +608,25 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Priority WhatsApp support</li>
         </ul>
         <a class="btn btn-primary" href="#contact">Try Growth free</a>
+      </div>
+
+      <div class="plan">
+        <h3>Pro</h3>
+        <div class="price"><span class="amount">R999</span><span class="period">/ month</span></div>
+        <div class="plan-badges">
+          <span class="plan-badge trial"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> 7-day free trial</span>
+          <span class="plan-badge fee">R499 setup fee</span>
+        </div>
+        <p class="desc">For businesses running more than one number, location or team &mdash; with extra volume and support to match.</p>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Everything in Growth</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Up to 10 WhatsApp numbers / team members</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Up to 8,000 conversations / month</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Combined reporting across locations</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> A dedicated onboarding specialist</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Priority phone &amp; WhatsApp support</li>
+        </ul>
+        <a class="btn btn-ghost" href="#contact">Try Pro free</a>
       </div>
     </div>
 
