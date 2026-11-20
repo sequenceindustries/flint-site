@@ -325,17 +325,39 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
   content:""; position:absolute; left:50%; top:0; transform:translateX(-50%); width:130px; height:5px;
   background:#0d0d0f; border-radius:0 0 7px 7px;
 }
-.dash-app{display:flex; flex-direction:column}
-.dash-top{display:flex; align-items:center; gap:7px; padding:10px 14px; background:var(--surface-2); border-bottom:1px solid var(--border)}
+.dash-app{display:flex; flex-direction:column; aspect-ratio:16/10}
+.dash-top{display:flex; align-items:center; gap:7px; padding:10px 14px; background:var(--surface-2); border-bottom:1px solid var(--border); flex:none}
 .dash-top .dot{width:8px; height:8px; border-radius:50%; background:var(--border)}
 .dash-top .url{margin-left:8px; font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--muted-2); background:var(--bg); padding:3px 10px; border-radius:99px}
-.dash-layout{display:grid; grid-template-columns:128px 1fr 1fr; min-height:320px}
-.dash-nav{background:var(--surface-2); border-right:1px solid var(--border); padding:14px 8px; display:flex; flex-direction:column; gap:4px}
-.dash-nav span{display:block; padding:8px 10px; border-radius:8px; font-size:12px; color:var(--muted); transition:background .2s ease, color .2s ease}
+.dash-body{display:flex; flex:1; min-height:0}
+
+.dash-nav{width:166px; flex:none; background:var(--surface-2); border-right:1px solid var(--border); padding:16px 12px; display:flex; flex-direction:column}
+.dash-nav-brand{display:flex; align-items:center; gap:7px; font-family:'Montserrat',sans-serif; font-weight:700; font-size:12.5px; color:var(--fg); padding:0 6px 16px}
+.dash-nav-brand svg{flex:none; color:var(--accent)}
+.dash-nav-links{display:flex; flex-direction:column; gap:2px; flex:1}
+.dash-nav span{display:flex; align-items:center; gap:9px; padding:8px 9px; border-radius:8px; font-size:12px; color:var(--muted); transition:background .2s ease, color .2s ease}
+.dash-nav span svg{flex:none; opacity:.85}
 .dash-nav span.active{background:var(--surface); color:var(--fg); font-weight:600; box-shadow:0 0 0 1px var(--border)}
-.dash-main{padding:16px}
-.dash-main.dash-list{border-right:1px solid var(--border)}
-.dash-main h5{font-family:'Montserrat',sans-serif; font-size:13px; margin-bottom:10px; color:var(--muted-2); text-transform:uppercase; letter-spacing:.06em}
+.dash-nav-user{display:flex; align-items:center; gap:8px; padding:12px 7px 0; margin-top:8px; border-top:1px solid var(--border); font-size:11px; color:var(--muted); font-weight:600}
+.dash-nav-user .av{width:21px; height:21px; border-radius:50%; background:linear-gradient(135deg,var(--accent),var(--accent-2)); display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; color:var(--accent-fg); flex:none}
+
+.dash-content{flex:1; min-width:0; display:flex; flex-direction:column; padding:16px 18px; gap:14px; overflow:hidden}
+.dash-content-head{display:flex; align-items:center; justify-content:space-between; gap:12px; flex:none}
+.dash-content-head h5{font-family:'Montserrat',sans-serif; font-size:15px; color:var(--fg)}
+.dash-search{display:flex; align-items:center; gap:7px; background:var(--surface-2); border:1px solid var(--border); border-radius:99px; padding:6px 13px; font-size:11px; color:var(--muted-2); flex:none}
+.dash-search svg{flex:none}
+
+.dash-stats{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; flex:none}
+.dash-stat{background:var(--surface-2); border:1px solid var(--border); border-radius:10px; padding:9px 11px}
+.dash-stat .num{font-family:'IBM Plex Mono',monospace; font-size:18px; font-weight:600; color:var(--fg); line-height:1.2}
+.dash-stat .num.good{color:var(--good)}
+.dash-stat .num.warn{color:var(--warn)}
+.dash-stat .label{font-size:9.5px; color:var(--muted); margin-top:2px}
+
+.dash-panels{display:grid; grid-template-columns:1.3fr 1fr; gap:14px; flex:1; min-height:0}
+.dash-panel{background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:13px; overflow-y:auto; display:flex; flex-direction:column; scrollbar-width:none}
+.dash-panel::-webkit-scrollbar{display:none}
+.dash-panel h6{font-family:'Montserrat',sans-serif; font-size:11px; color:var(--muted-2); text-transform:uppercase; letter-spacing:.06em; margin:0 0 8px; font-weight:600}
 .convo-row{display:flex; gap:10px; align-items:center; padding:9px 6px; border-radius:8px; margin:0 -6px; transition:background .2s ease}
 .convo-row:hover{background:var(--surface-2)}
 .convo-row+.convo-row{border-top:1px solid var(--border)}
@@ -361,9 +383,14 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
   .steps{grid-template-columns:1fr 1fr}
   .why-grid{grid-template-columns:1fr}
   .pricing-grid{grid-template-columns:1fr}
-  .dash-layout{grid-template-columns:1fr}
-  .dash-nav{flex-direction:row; flex-wrap:wrap; border-right:none; border-bottom:1px solid var(--border)}
-  .dash-main.dash-list{border-right:none; border-bottom:1px solid var(--border)}
+  .dash-app{aspect-ratio:auto}
+  .dash-body{flex-direction:column}
+  .dash-nav{width:auto; flex-direction:row; align-items:center; overflow-x:auto; border-right:none; border-bottom:1px solid var(--border); padding:10px 12px}
+  .dash-nav-brand, .dash-nav-user{display:none}
+  .dash-nav-links{flex-direction:row; flex:none; gap:4px}
+  .dash-nav span{white-space:nowrap}
+  .dash-stats{grid-template-columns:repeat(2,1fr)}
+  .dash-panels{grid-template-columns:1fr; overflow-y:auto}
   .cta-band{flex-direction:column; align-items:flex-start}
   .demo-split{grid-template-columns:1fr; gap:28px}
   .demo-split .demo-phone{order:-1}
@@ -611,26 +638,47 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
         <div class="laptop-screen">
           <div class="dash-app">
             <div class="dash-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">app.flint.africa</span></div>
-            <div class="dash-layout">
+            <div class="dash-body">
               <div class="dash-nav">
-                <span class="active">Chats</span>
-                <span>Business details</span>
-                <span>Team &amp; numbers</span>
-                <span>Billing</span>
+                <div class="dash-nav-brand">
+                  <svg width="14" height="14" viewBox="0 0 26 26" fill="none"><path d="M13 1 L19 11 L13 9 L7 11 Z" fill="currentColor"/><path d="M13 25 L7 15 L13 17 L19 15 Z" fill="currentColor" opacity=".55"/></svg>
+                  Flint
+                </div>
+                <div class="dash-nav-links">
+                  <span class="active"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2 3.5h12a1 1 0 0 1 1 1V11a1 1 0 0 1-1 1H6l-3 2.5V12H2a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg> Chats</span>
+                  <span><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="5" width="13" height="8.5" rx="1.3" stroke="currentColor" stroke-width="1.3"/><path d="M5.5 5V3.8a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1V5" stroke="currentColor" stroke-width="1.3"/></svg> Business details</span>
+                  <span><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="5.3" cy="5" r="2.1" stroke="currentColor" stroke-width="1.3"/><path d="M1.5 13.3c0-2.1 1.7-3.6 3.8-3.6s3.8 1.5 3.8 3.6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="11.3" cy="5.4" r="1.7" stroke="currentColor" stroke-width="1.2"/><path d="M10 9.5c1.7.2 3 1.5 3.2 3.3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg> Team &amp; numbers</span>
+                  <span><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="3.5" width="13" height="9" rx="1.3" stroke="currentColor" stroke-width="1.3"/><path d="M1.5 6.5h13" stroke="currentColor" stroke-width="1.3"/></svg> Billing</span>
+                </div>
+                <div class="dash-nav-user"><span class="av">FC</span> Flint Co.</div>
               </div>
-              <div class="dash-main dash-list">
-                <h5>Chats</h5>
-                <div class="convo-row"><div class="av">TM</div><div class="meta"><b>Thabo M.</b><span>Kitchen tap, Roodepoort&hellip;</span></div><span class="status handled">Flint replied</span></div>
-                <div class="convo-row"><div class="av">LN</div><div class="meta"><b>Lerato N.</b><span>Can I get a refund on&hellip;</span></div><span class="status needs">Needs you</span></div>
-                <div class="convo-row"><div class="av">SK</div><div class="meta"><b>Sibusiso K.</b><span>3 bedroom, deep clean&hellip;</span></div><span class="status handled">Flint replied</span></div>
-                <div class="convo-row"><div class="av">AP</div><div class="meta"><b>Anele P.</b><span>Geyser is leaking, urgent&hellip;</span></div><span class="status needs">Needs you</span></div>
-              </div>
-              <div class="dash-main dash-detail">
-                <h5>Business details</h5>
-                <div class="biz-row"><div><span class="label">Hours</span>Mon&ndash;Sat, 7am&ndash;5pm</div><span class="mono" style="color:var(--accent)">Edit</span></div>
-                <div class="biz-row"><div><span class="label">Call-out fee</span>R350</div><span class="mono" style="color:var(--accent)">Edit</span></div>
-                <div class="biz-row"><div><span class="label">Areas covered</span>Soweto, Roodepoort, Joburg South</div><span class="mono" style="color:var(--accent)">Edit</span></div>
-                <div class="biz-row"><div><span class="label">Who gets handed tricky chats</span>Sipho &middot; 082 000 0001</div><span class="mono" style="color:var(--accent)">Edit</span></div>
+              <div class="dash-content">
+                <div class="dash-content-head">
+                  <h5>Chats</h5>
+                  <div class="dash-search"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="4.3" stroke="currentColor" stroke-width="1.3"/><path d="M12.8 12.8 15 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg> Search conversations&hellip;</div>
+                </div>
+                <div class="dash-stats">
+                  <div class="dash-stat"><div class="num">12</div><div class="label">Open chats</div></div>
+                  <div class="dash-stat"><div class="num good">18</div><div class="label">Resolved today</div></div>
+                  <div class="dash-stat"><div class="num warn">2</div><div class="label">Needs you</div></div>
+                  <div class="dash-stat"><div class="num">8s</div><div class="label">Avg reply time</div></div>
+                </div>
+                <div class="dash-panels">
+                  <div class="dash-panel">
+                    <h6>Recent conversations</h6>
+                    <div class="convo-row"><div class="av">TM</div><div class="meta"><b>Thabo M.</b><span>Kitchen tap, Roodepoort&hellip;</span></div><span class="status handled">Flint replied</span></div>
+                    <div class="convo-row"><div class="av">LN</div><div class="meta"><b>Lerato N.</b><span>Can I get a refund on&hellip;</span></div><span class="status needs">Needs you</span></div>
+                    <div class="convo-row"><div class="av">SK</div><div class="meta"><b>Sibusiso K.</b><span>3 bedroom, deep clean&hellip;</span></div><span class="status handled">Flint replied</span></div>
+                    <div class="convo-row"><div class="av">AP</div><div class="meta"><b>Anele P.</b><span>Geyser is leaking, urgent&hellip;</span></div><span class="status needs">Needs you</span></div>
+                  </div>
+                  <div class="dash-panel">
+                    <h6>Business details</h6>
+                    <div class="biz-row"><div><span class="label">Hours</span>Mon&ndash;Sat, 7am&ndash;5pm</div><span class="mono" style="color:var(--accent)">Edit</span></div>
+                    <div class="biz-row"><div><span class="label">Call-out fee</span>R350</div><span class="mono" style="color:var(--accent)">Edit</span></div>
+                    <div class="biz-row"><div><span class="label">Areas covered</span>Soweto, Roodepoort, Joburg South</div><span class="mono" style="color:var(--accent)">Edit</span></div>
+                    <div class="biz-row"><div><span class="label">Who gets handed tricky chats</span>Sipho &middot; 082 000 0001</div><span class="mono" style="color:var(--accent)">Edit</span></div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
