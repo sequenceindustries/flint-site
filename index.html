@@ -54,13 +54,13 @@ a{color:inherit}
 .btn{
   display:inline-flex; align-items:center; gap:8px; padding:13px 22px; border-radius:8px;
   font-weight:600; font-size:15px; text-decoration:none; border:1px solid transparent; cursor:pointer;
-  transition:transform .15s ease, border-color .15s ease, background .15s ease;
+  transition:transform .2s cubic-bezier(.22,1,.36,1), border-color .15s ease, background .15s ease, box-shadow .2s ease;
 }
 .btn:active{transform:translateY(1px)}
 .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:var(--accent-fg);}
-.btn-primary:hover{filter:brightness(1.07)}
+.btn-primary:hover{filter:brightness(1.07); transform:translateY(-2px); box-shadow:0 14px 24px -12px color-mix(in srgb, var(--accent) 60%, transparent)}
 .btn-ghost{background:transparent; border-color:var(--border); color:var(--fg)}
-.btn-ghost:hover{border-color:var(--muted-2)}
+.btn-ghost:hover{border-color:var(--muted-2); transform:translateY(-2px)}
 
 /* header */
 header.site{
@@ -73,8 +73,10 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .brand{display:flex; align-items:center; gap:10px; font-family:'Syne',sans-serif; font-weight:700; font-size:19px; text-decoration:none}
 .brand .mark{width:26px; height:26px; flex:none}
 .navlinks{display:flex; align-items:center; gap:28px; font-size:14px; font-weight:500; color:var(--muted)}
-.navlinks a{text-decoration:none}
+.navlinks a{text-decoration:none; position:relative; padding-bottom:2px}
+.navlinks a::after{content:""; position:absolute; left:0; right:100%; bottom:0; height:1.5px; background:var(--accent); transition:right .25s cubic-bezier(.22,1,.36,1)}
 .navlinks a:hover{color:var(--fg)}
+.navlinks a:hover::after{right:0}
 .navcta{display:flex; gap:10px; align-items:center}
 .navcta .btn{padding:10px 16px; font-size:14px}
 .menu-toggle{display:none; background:none; border:1px solid var(--border); border-radius:8px; width:40px; height:40px; color:var(--fg); font-size:18px}
@@ -103,7 +105,9 @@ section{padding-block:clamp(56px,9vw,104px)}
 .split-card{
   background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:28px;
   display:flex; flex-direction:column; gap:16px;
+  transition:transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s ease, border-color .3s ease;
 }
+.split-card:hover{transform:translateY(-5px); box-shadow:0 20px 36px -22px rgba(20,20,40,.25)}
 .split-card.live{border-color:color-mix(in srgb, var(--accent) 55%, var(--border))}
 .tag{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; padding:4px 9px; border-radius:99px; width:fit-content}
 .tag.platform{background:var(--surface-2); color:var(--muted)}
@@ -116,15 +120,18 @@ section{padding-block:clamp(56px,9vw,104px)}
 
 /* steps */
 .steps{display:grid; grid-template-columns:repeat(4,1fr); gap:20px}
-.step{display:flex; flex-direction:column; gap:10px; padding:22px; border-radius:14px; background:var(--surface); border:1px solid var(--border)}
+.step{display:flex; flex-direction:column; gap:10px; padding:22px; border-radius:14px; background:var(--surface); border:1px solid var(--border); transition:transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s ease, border-color .3s ease}
+.step:hover{transform:translateY(-5px); box-shadow:0 18px 32px -20px rgba(20,20,40,.25); border-color:color-mix(in srgb, var(--accent) 35%, var(--border))}
 .step .num{font-family:'IBM Plex Mono',monospace; color:var(--accent); font-size:13px}
 .step h4{font-size:17px}
 .step p{font-size:14px; color:var(--muted)}
 
 /* why grid */
 .why-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:20px}
-.why-card{padding:26px; border-radius:14px; background:var(--surface); border:1px solid var(--border); display:flex; flex-direction:column; gap:12px}
-.why-card .icon{width:38px; height:38px; border-radius:10px; background:color-mix(in srgb, var(--accent) 16%, transparent); display:flex; align-items:center; justify-content:center; color:var(--accent)}
+.why-card{padding:26px; border-radius:14px; background:var(--surface); border:1px solid var(--border); display:flex; flex-direction:column; gap:12px; transition:transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s ease, border-color .3s ease}
+.why-card:hover{transform:translateY(-5px); box-shadow:0 18px 32px -20px rgba(20,20,40,.25); border-color:color-mix(in srgb, var(--accent) 35%, var(--border))}
+.why-card .icon{width:38px; height:38px; border-radius:10px; background:color-mix(in srgb, var(--accent) 16%, transparent); display:flex; align-items:center; justify-content:center; color:var(--accent); transition:transform .3s cubic-bezier(.22,1,.36,1)}
+.why-card:hover .icon{transform:scale(1.1) rotate(-4deg)}
 .why-card h3{font-size:18px}
 .why-card p{font-size:14.5px; color:var(--muted)}
 
@@ -134,8 +141,11 @@ section{padding-block:clamp(56px,9vw,104px)}
 .plan{
   background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:28px;
   display:flex; flex-direction:column; gap:18px; position:relative;
+  transition:transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s ease;
 }
+.plan:hover{transform:translateY(-6px); box-shadow:0 22px 40px -22px rgba(20,20,40,.3)}
 .plan.featured{border-color:var(--accent); box-shadow:0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent)}
+.plan.featured:hover{box-shadow:0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent), 0 22px 40px -22px rgba(20,20,40,.3)}
 .plan.pro li svg{color:var(--accent-3)}
 .plan.pro .btn-ghost{border-color:color-mix(in srgb, var(--accent-3) 50%, var(--border)); color:var(--accent-3)}
 .plan .pill{position:absolute; top:-12px; left:28px; background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:var(--accent-fg); font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:5px 12px; border-radius:99px}
@@ -181,13 +191,37 @@ section{padding-block:clamp(56px,9vw,104px)}
 details.faq-item summary{list-style:none}
 details.faq-item summary::-webkit-details-marker{display:none}
 
-/* cta */
+/* cta: dark band for strong contrast at the close of the page */
 .cta-band{
-  border-radius:20px; background:linear-gradient(135deg, color-mix(in srgb, var(--accent) 22%, var(--surface)), var(--surface));
-  border:1px solid var(--border); padding:clamp(32px,6vw,56px); display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+  border-radius:24px; position:relative; overflow:hidden;
+  background:linear-gradient(155deg,#15161f,#0a0a10 55%,#171225);
+  padding:clamp(40px,7vw,64px); display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+  color:#f1f2f8;
 }
-.cta-band h2{font-size:clamp(22px,3.2vw,30px); max-width:28ch}
+.cta-band::before{
+  content:""; position:absolute; inset:-40% -10% auto auto; width:420px; height:420px; border-radius:50%;
+  background:radial-gradient(circle, color-mix(in srgb, var(--accent-2) 55%, transparent), transparent 70%);
+  pointer-events:none;
+}
+.cta-band::after{
+  content:""; position:absolute; inset:auto auto -30% -10%; width:380px; height:380px; border-radius:50%;
+  background:radial-gradient(circle, color-mix(in srgb, var(--accent-3) 45%, transparent), transparent 70%);
+  pointer-events:none;
+}
+.cta-band > *{position:relative; z-index:1}
+.cta-band h2{font-size:clamp(22px,3.2vw,30px); max-width:28ch; color:#fff}
 .cta-band .actions{display:flex; gap:12px; flex-wrap:wrap}
+.cta-band .btn-primary{box-shadow:0 10px 28px -10px color-mix(in srgb, var(--accent) 70%, transparent)}
+
+/* stats band: a dark section used for a quick trust strip before pricing */
+.stats-band{background:linear-gradient(170deg,#121319,#0a0a10); border-radius:24px; padding:clamp(32px,5vw,52px); color:#f1f2f8}
+.stats-band .section-head .eyebrow{color:var(--accent-2)}
+.stats-band .section-head h2{color:#fff}
+.stats-band .section-head p{color:#a2a6b8}
+.stats-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-top:12px}
+.stat-card{text-align:center; padding:18px 10px}
+.stat-num{font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(28px,4vw,40px); background:linear-gradient(135deg,var(--accent-2),var(--accent-3)); -webkit-background-clip:text; background-clip:text; color:transparent}
+.stat-label{font-size:13px; color:#a2a6b8; margin-top:6px}
 
 footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:calc(40px + env(safe-area-inset-bottom,0px))}
 .foot-grid{display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; font-size:13.5px; color:var(--muted-2)}
@@ -249,7 +283,8 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
 
 /* dashboard mockup */
 .dash-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px}
-.dash-mock{background:var(--surface); border:1px solid var(--border); border-radius:16px; overflow:hidden}
+.dash-mock{background:var(--surface); border:1px solid var(--border); border-radius:16px; overflow:hidden; transition:transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s ease}
+.dash-mock:hover{transform:translateY(-5px); box-shadow:0 20px 36px -22px rgba(20,20,40,.25)}
 .dash-top{display:flex; align-items:center; gap:7px; padding:10px 14px; background:var(--surface-2); border-bottom:1px solid var(--border)}
 .dash-top .dot{width:8px; height:8px; border-radius:50%; background:var(--border)}
 .dash-top .url{margin-left:8px; font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--muted-2); background:var(--bg); padding:3px 10px; border-radius:99px}
@@ -259,7 +294,8 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
 .dash-nav span.active{background:var(--surface); color:var(--fg); font-weight:600; box-shadow:0 0 0 1px var(--border)}
 .dash-main{padding:16px}
 .dash-main h5{font-family:'Syne',sans-serif; font-size:13px; margin-bottom:10px; color:var(--muted-2); text-transform:uppercase; letter-spacing:.06em}
-.convo-row{display:flex; gap:10px; align-items:center; padding:9px 2px}
+.convo-row{display:flex; gap:10px; align-items:center; padding:9px 6px; border-radius:8px; margin:0 -6px; transition:background .2s ease}
+.convo-row:hover{background:var(--surface-2)}
 .convo-row+.convo-row{border-top:1px solid var(--border)}
 .convo-row .av{width:28px; height:28px; border-radius:50%; background:var(--surface-2); display:flex; align-items:center; justify-content:center; font-size:10.5px; font-weight:700; color:var(--muted); flex:none}
 .convo-row .meta{flex:1; min-width:0}
@@ -293,6 +329,23 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
 }
 @media (max-width:1140px) and (min-width:861px){
   .pricing-grid{grid-template-columns:1fr 1fr; max-width:680px}
+}
+@media (max-width:640px){
+  .stats-grid{grid-template-columns:1fr 1fr}
+}
+
+/* scroll-reveal + reduced motion */
+.reveal{opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1; transform:translateY(0)}
+.reveal-stagger.in .reveal-item{opacity:1; transform:translateY(0)}
+.reveal-item{opacity:0; transform:translateY(18px); transition:opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1)}
+.reveal-item:nth-child(1){transition-delay:0s}
+.reveal-item:nth-child(2){transition-delay:.08s}
+.reveal-item:nth-child(3){transition-delay:.16s}
+.reveal-item:nth-child(4){transition-delay:.24s}
+.reveal-item:nth-child(5){transition-delay:.32s}
+@media (prefers-reduced-motion: reduce){
+  .reveal, .reveal-item{opacity:1 !important; transform:none !important; transition:none !important}
 }
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
@@ -371,13 +424,13 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
   </section>
 
   <section id="platform" class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <div class="eyebrow">The platform</div>
       <h2>One platform. Apps built on top.</h2>
       <p>Flint handles everything a WhatsApp business tool needs underneath &mdash; the connection, the approvals, the guardrails, the handoff to a human. Specific jobs get built as apps on top. The WhatsApp Business Assistant is the first one, live today.</p>
     </div>
-    <div class="split">
-      <div class="split-card">
+    <div class="split reveal-stagger">
+      <div class="split-card reveal-item">
         <span class="tag platform">The Flint platform</span>
         <h3>What runs underneath every app</h3>
         <ul>
@@ -388,8 +441,8 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> One dashboard if you run more than one business or number</li>
         </ul>
       </div>
-      <div class="split-arrow">POWERS &rarr;</div>
-      <div class="split-card live">
+      <div class="split-arrow reveal-item">POWERS &rarr;</div>
+      <div class="split-card live reveal-item">
         <span class="tag live">Live now</span>
         <h3>WhatsApp Business Assistant</h3>
         <ul>
@@ -403,21 +456,21 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
   </section>
 
   <section id="how" class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <div class="eyebrow">Setup</div>
       <h2>Up and running in an afternoon.</h2>
       <p>No computer skills needed, no new app to learn, and nothing goes live until you've seen and approved it.</p>
     </div>
-    <div class="steps">
-      <div class="step"><span class="num mono">01</span><h4>Connect your number</h4><p>Keep your existing WhatsApp Business number and app. Flint sits alongside it.</p></div>
-      <div class="step"><span class="num mono">02</span><h4>Tell Flint about your business</h4><p>Answer plain questions about what you do, your hours, your prices and your policies.</p></div>
-      <div class="step"><span class="num mono">03</span><h4>Approve every answer</h4><p>Review each drafted reply. Nothing reaches a customer until you've approved the exact wording.</p></div>
-      <div class="step"><span class="num mono">04</span><h4>Switch it on</h4><p>Flint starts replying immediately. Anything it can't handle lands with you, with full context.</p></div>
+    <div class="steps reveal-stagger">
+      <div class="step reveal-item"><span class="num mono">01</span><h4>Connect your number</h4><p>Keep your existing WhatsApp Business number and app. Flint sits alongside it.</p></div>
+      <div class="step reveal-item"><span class="num mono">02</span><h4>Tell Flint about your business</h4><p>Answer plain questions about what you do, your hours, your prices and your policies.</p></div>
+      <div class="step reveal-item"><span class="num mono">03</span><h4>Approve every answer</h4><p>Review each drafted reply. Nothing reaches a customer until you've approved the exact wording.</p></div>
+      <div class="step reveal-item"><span class="num mono">04</span><h4>Switch it on</h4><p>Flint starts replying immediately. Anything it can't handle lands with you, with full context.</p></div>
     </div>
   </section>
 
   <section class="wrap">
-    <div class="demo-split">
+    <div class="demo-split reveal">
       <div class="demo-copy">
         <div class="eyebrow">See it in action</div>
         <h2>A dripping tap, sorted without a phone call.</h2>
@@ -461,13 +514,13 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
   </section>
 
   <section class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <div class="eyebrow">Your dashboard</div>
       <h2>See every chat. Manage your business. All in one simple place.</h2>
       <p>No tech skills needed. One screen shows every conversation your customers have had, and another lets you update your hours, prices and answers whenever they change.</p>
     </div>
-    <div class="dash-grid">
-      <div class="dash-mock">
+    <div class="dash-grid reveal-stagger">
+      <div class="dash-mock reveal-item">
         <div class="dash-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">app.flint.africa</span></div>
         <div class="dash-body">
           <div class="dash-nav">
@@ -485,7 +538,7 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
           </div>
         </div>
       </div>
-      <div class="dash-mock">
+      <div class="dash-mock reveal-item">
         <div class="dash-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">app.flint.africa</span></div>
         <div class="dash-body">
           <div class="dash-nav">
@@ -507,7 +560,7 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
   </section>
 
   <section class="wrap">
-    <div class="demo-split reverse">
+    <div class="demo-split reverse reveal">
       <div class="demo-phone">
         <div class="phone-frame">
           <span class="phone-side-btn"></span>
@@ -551,27 +604,27 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
   </section>
 
   <section class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <div class="eyebrow">Why Flint</div>
       <h2>Built to be trusted with your customers, not just fast.</h2>
     </div>
-    <div class="why-grid">
-      <div class="why-card">
+    <div class="why-grid reveal-stagger">
+      <div class="why-card reveal-item">
         <div class="icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L17 4.5V9C17 13.5 14 16.8 10 18C6 16.8 3 13.5 3 9V4.5L10 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 10l2 2 4-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <h3>Never invents a price or a promise</h3>
         <p>Every reply traces back to something your business wrote and approved. If Flint doesn't have an approved answer, it says so and hands the conversation to you &mdash; it never guesses.</p>
       </div>
-      <div class="why-card">
+      <div class="why-card reveal-item">
         <div class="icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 9.5C3 5.9 6.1 3 10 3s7 2.9 7 6.5-3.1 6.5-7 6.5c-.9 0-1.8-.15-2.6-.43L3 17l1.1-3.3C3.4 12.4 3 11 3 9.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
         <h3>Lives where you already are</h3>
         <p>No new inbox to log into. Reply to a customer from your own WhatsApp Business app, and Flint automatically steps back for that conversation.</p>
       </div>
-      <div class="why-card">
+      <div class="why-card reveal-item">
         <div class="icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 18s6-5.5 6-10a6 6 0 1 0-12 0c0 4.5 6 10 6 10Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="10" cy="8" r="2.2" stroke="currentColor" stroke-width="1.5"/></svg></div>
         <h3>Built for South African businesses</h3>
         <p>Rand pricing, South African place names and phrasing, and handling of customer data with POPIA in mind from day one.</p>
       </div>
-      <div class="why-card">
+      <div class="why-card reveal-item">
         <div class="icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2l8 4-8 4-8-4 8-4Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M2 10l8 4 8-4" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M2 14l8 4 8-4" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
         <h3>One platform, growing with you</h3>
         <p>Today, Flint runs WhatsApp enquiries for your business. The same approved-answer approach is what the rest of Flint's apps will be built on, as they ship.</p>
@@ -579,15 +632,42 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
     </div>
   </section>
 
+  <section class="wrap">
+    <div class="stats-band">
+      <div class="section-head reveal">
+        <div class="eyebrow">By the numbers</div>
+        <h2>What switching to Flint actually changes.</h2>
+      </div>
+      <div class="stats-grid reveal-stagger">
+        <div class="stat-card reveal-item">
+          <div class="stat-num" data-count="10" data-prefix="&lt;" data-suffix="s">&lt;0s</div>
+          <div class="stat-label">Typical first reply</div>
+        </div>
+        <div class="stat-card reveal-item">
+          <div class="stat-num" data-count="100" data-suffix="%">0%</div>
+          <div class="stat-label">Replies traced to an approved answer</div>
+        </div>
+        <div class="stat-card reveal-item">
+          <div class="stat-num" data-count="7" data-suffix="-day">0-day</div>
+          <div class="stat-label">Free trial, no card required</div>
+        </div>
+        <div class="stat-card reveal-item">
+          <div class="stat-num" data-count="24" data-suffix="/7">0/7</div>
+          <div class="stat-label">Watching WhatsApp for your customers</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="pricing" class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <div class="eyebrow">Pricing</div>
       <h2>Early access pricing for the WhatsApp Business Assistant.</h2>
       <p>Flint is early. These are the prices our first customers pay, locked in for your first six months. Try any plan free for 7 days, then cancel any time.</p>
     </div>
 
-    <div class="pricing-grid">
-      <div class="plan">
+    <div class="pricing-grid reveal-stagger">
+      <div class="plan reveal-item">
         <h3>Starter</h3>
         <div class="price"><span class="amount">R299</span><span class="period">/ month</span></div>
         <div class="plan-badges">
@@ -605,7 +685,7 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
         <a class="btn btn-ghost" href="#contact">Try Starter free</a>
       </div>
 
-      <div class="plan featured">
+      <div class="plan featured reveal-item">
         <span class="pill">Most businesses choose this</span>
         <h3>Growth</h3>
         <div class="price"><span class="amount">R599</span><span class="period">/ month</span></div>
@@ -625,7 +705,7 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
         <a class="btn btn-primary" href="#contact">Try Growth free</a>
       </div>
 
-      <div class="plan pro">
+      <div class="plan pro reveal-item">
         <h3>Pro</h3>
         <div class="price"><span class="amount">R999</span><span class="period">/ month</span></div>
         <div class="plan-badges">
@@ -664,7 +744,7 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
   </section>
 
   <section id="faq" class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <div class="eyebrow">Questions</div>
       <h2>Good to know before you sign up.</h2>
     </div>
@@ -697,7 +777,7 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
   </section>
 
   <section id="contact" class="wrap">
-    <div class="cta-band">
+    <div class="cta-band reveal">
       <h2>Tell us about your business, and we'll show you what Flint would say to your customers.</h2>
       <div class="actions">
         <a class="btn btn-primary" href="mailto:hello@flint.africa?subject=Flint%20WhatsApp%20Assistant">Email hello@flint.africa</a>
@@ -823,5 +903,65 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
     clearBody();
     setTimeout(function(){ playFrom(0); }, 400 + idx * 350);
   });
+})();
+
+/* scroll-reveal for sections and staggered grids */
+(function(){
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els = document.querySelectorAll('.reveal, .reveal-stagger');
+  if (reduced || !('IntersectionObserver' in window)){
+    els.forEach(function(el){ el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting){
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+  els.forEach(function(el){ io.observe(el); });
+})();
+
+/* count-up stat numbers in the dark stats band */
+(function(){
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var nums = document.querySelectorAll('.stat-num');
+  if (!nums.length) return;
+
+  function render(el, value){
+    var prefix = el.getAttribute('data-prefix') || '';
+    var suffix = el.getAttribute('data-suffix') || '';
+    el.textContent = prefix + value + suffix;
+  }
+
+  function animate(el){
+    var target = parseInt(el.getAttribute('data-count'), 10) || 0;
+    if (reduced){ render(el, target); return; }
+    var start = null, duration = 1100;
+    function step(ts){
+      if (start === null) start = ts;
+      var p = Math.min(1, (ts - start) / duration);
+      var eased = 1 - Math.pow(1 - p, 3);
+      render(el, Math.round(eased * target));
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  if (!('IntersectionObserver' in window)){
+    nums.forEach(function(el){ animate(el); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting){
+        animate(entry.target);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  nums.forEach(function(el){ io.observe(el); });
 })();
 </script>
