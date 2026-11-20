@@ -8,7 +8,7 @@
 :root{
   --bg:#f7f7fb; --surface:#ffffff; --surface-2:#eef0f7; --border:#e1e3ee;
   --fg:#14151d; --muted:#5a5e70; --muted-2:#888da0;
-  --accent:#0f766e; --accent-2:#ea580c; --accent-3:#be123c; --accent-fg:#ffffff;
+  --accent:#1d4ed8; --accent-2:#f59e0b; --accent-3:#7c3aed; --accent-fg:#ffffff;
   --mono:#3c3f4d;
   --good:#16915a; --warn:#b4601a;
   --chatbg:#eef1f6;
@@ -19,7 +19,7 @@
   :root:not([data-theme="light"]){
     --bg:#0d0e14; --surface:#15161f; --surface-2:#1c1e2a; --border:#2a2c3b;
     --fg:#f1f2f8; --muted:#a2a6b8; --muted-2:#767a8d;
-    --accent:#2dd4bf; --accent-2:#fb923c; --accent-3:#fb7185; --accent-fg:#0b0c12;
+    --accent:#60a5fa; --accent-2:#fbbf24; --accent-3:#a78bfa; --accent-fg:#0b0c12;
     --mono:#c6c9da;
     --good:#34d399; --warn:#f0a63c;
     --chatbg:#11141c;
@@ -29,7 +29,7 @@
 :root[data-theme="dark"]{
   --bg:#0d0e14; --surface:#15161f; --surface-2:#1c1e2a; --border:#2a2c3b;
   --fg:#f1f2f8; --muted:#a2a6b8; --muted-2:#767a8d;
-  --accent:#2dd4bf; --accent-2:#fb923c; --accent-3:#fb7185; --accent-fg:#0b0c12;
+  --accent:#60a5fa; --accent-2:#fbbf24; --accent-3:#a78bfa; --accent-fg:#0b0c12;
   --mono:#c6c9da;
   --good:#34d399; --warn:#f0a63c;
   --chatbg:#11141c;
@@ -52,15 +52,18 @@ a{color:inherit}
 }
 .eyebrow::before{content:""; width:7px; height:7px; border-radius:1px; background:var(--accent); transform:rotate(45deg); display:inline-block}
 .btn{
-  display:inline-flex; align-items:center; gap:8px; padding:13px 22px; border-radius:8px;
-  font-weight:600; font-size:15px; text-decoration:none; border:1px solid transparent; cursor:pointer;
-  transition:transform .2s cubic-bezier(.22,1,.36,1), border-color .15s ease, background .15s ease, box-shadow .2s ease;
+  position:relative; display:inline-flex; align-items:center; gap:8px; padding:13px 22px; border-radius:8px;
+  font-weight:600; font-size:15px; text-decoration:none; border:none; cursor:pointer; overflow:hidden;
+  transition:transform .2s cubic-bezier(.22,1,.36,1), background .15s ease, box-shadow .2s ease;
 }
-.btn:active{transform:translateY(1px)}
+.btn:active{transform:translateY(1px) scale(.97)}
+.btn::after{content:""; position:absolute; top:0; left:-75%; width:50%; height:100%; background:linear-gradient(115deg, transparent, rgba(255,255,255,.4), transparent); transform:skewX(-18deg); transition:left .7s cubic-bezier(.22,1,.36,1)}
+.btn:hover::after{left:125%}
 .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:var(--accent-fg);}
 .btn-primary:hover{filter:brightness(1.07); transform:translateY(-2px); box-shadow:0 14px 24px -12px color-mix(in srgb, var(--accent) 60%, transparent)}
-.btn-ghost{background:transparent; border-color:var(--border); color:var(--fg)}
-.btn-ghost:hover{border-color:var(--muted-2); transform:translateY(-2px)}
+.btn-ghost{background:var(--surface-2); color:var(--fg)}
+.btn-ghost:hover{background:color-mix(in srgb, var(--fg) 8%, var(--surface-2)); transform:translateY(-2px)}
+@media (prefers-reduced-motion:reduce){.btn::after{display:none}}
 
 /* header */
 header.site{
@@ -71,7 +74,8 @@ header.site{
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:21;background:var(--bg)}
 .nav{display:flex; align-items:center; justify-content:flex-start; padding-block:16px; gap:16px}
 .brand{display:flex; align-items:center; gap:10px; font-family:'Montserrat',sans-serif; font-weight:700; font-size:19px; text-decoration:none}
-.brand .mark{width:26px; height:26px; flex:none}
+.brand .mark{width:26px; height:26px; flex:none; transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.brand:hover .mark{transform:rotate(180deg)}
 .navlinks{display:flex; align-items:center; gap:28px; font-size:14px; font-weight:500; color:var(--muted); margin-left:auto}
 .navlinks a{text-decoration:none; position:relative; padding-bottom:2px}
 .navlinks a::after{content:""; position:absolute; left:0; right:100%; bottom:0; height:1.5px; background:var(--accent); transition:right .25s cubic-bezier(.22,1,.36,1)}
@@ -89,7 +93,23 @@ section{padding-block:clamp(28px,4.5vw,52px)}
 
 /* hero */
 .hero{padding-top:clamp(56px,10vw,96px); padding-bottom:clamp(40px,6vw,64px); position:relative; overflow:hidden}
-.hero-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:48px; align-items:center}
+.hero::before, .hero::after{content:""; position:absolute; width:420px; height:420px; border-radius:50%; filter:blur(80px); opacity:.28; z-index:0; pointer-events:none}
+.hero::before{background:var(--accent); top:-140px; left:-100px; animation:blobDrift1 16s ease-in-out infinite}
+.hero::after{background:var(--accent-2); bottom:-160px; right:-80px; animation:blobDrift2 18s ease-in-out infinite}
+@keyframes blobDrift1{0%,100%{transform:translate(0,0)} 50%{transform:translate(50px,34px)}}
+@keyframes blobDrift2{0%,100%{transform:translate(0,0)} 50%{transform:translate(-40px,-46px)}}
+.hero-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:48px; align-items:center; position:relative; z-index:1}
+.hero .eyebrow, .hero h1, .hero .lede, .hero .hero-ctas, .hero .hero-proof{opacity:0; animation:fadeUp .8s cubic-bezier(.22,1,.36,1) forwards}
+.hero .eyebrow{animation-delay:.05s}
+.hero h1{animation-delay:.15s}
+.hero .lede{animation-delay:.32s}
+.hero .hero-ctas{animation-delay:.48s}
+.hero .hero-proof{animation-delay:.6s}
+@keyframes fadeUp{from{opacity:0; transform:translateY(18px)} to{opacity:1; transform:translateY(0)}}
+@media (prefers-reduced-motion:reduce){
+  .hero::before, .hero::after{animation:none}
+  .hero .eyebrow, .hero h1, .hero .lede, .hero .hero-ctas, .hero .hero-proof{animation:none; opacity:1}
+}
 .hero h1{font-size:clamp(34px,5.4vw,58px); line-height:1.05}
 .hero .lede{font-size:18px; color:var(--muted); max-width:46ch; margin-top:18px}
 .hero-ctas{display:flex; gap:12px; margin-top:28px; flex-wrap:wrap}
@@ -147,7 +167,7 @@ section{padding-block:clamp(28px,4.5vw,52px)}
 .plan.featured{border-color:var(--accent); box-shadow:0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent)}
 .plan.featured:hover{box-shadow:0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent), 0 22px 40px -22px rgba(20,20,40,.3)}
 .plan.pro li svg{color:var(--accent-3)}
-.plan.pro .btn-ghost{border-color:color-mix(in srgb, var(--accent-3) 50%, var(--border)); color:var(--accent-3)}
+.plan.pro .btn-ghost{background:color-mix(in srgb, var(--accent-3) 14%, var(--surface-2)); color:var(--accent-3)}
 .plan .pill{position:absolute; top:-12px; left:28px; background:linear-gradient(110deg,var(--accent),var(--accent-2),var(--accent)); background-size:220% 100%; animation:pillShift 5s ease-in-out infinite; color:var(--accent-fg); font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:5px 12px; border-radius:99px}
 @keyframes pillShift{0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%}}
 @media (prefers-reduced-motion:reduce){.plan .pill{animation:none}}
@@ -155,7 +175,9 @@ section{padding-block:clamp(28px,4.5vw,52px)}
 .plan-badges{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px}
 .plan-badge{font-size:12.5px; font-weight:700; letter-spacing:.01em; padding:7px 13px; border-radius:99px; display:inline-flex; align-items:center; gap:6px; line-height:1}
 .plan-badge svg{flex:none}
-.plan-badge.trial{background:var(--good); color:#fff}
+.plan-badge.trial{background:var(--good); color:#fff; animation:badgeGlow 3s ease-in-out infinite}
+@keyframes badgeGlow{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb, var(--good) 35%, transparent)} 50%{box-shadow:0 0 0 5px transparent}}
+@media (prefers-reduced-motion:reduce){.plan-badge.trial{animation:none}}
 .plan-badge.fee{background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:var(--accent-fg)}
 .plan .price{display:flex; align-items:baseline; gap:6px; font-family:'IBM Plex Mono',monospace}
 .plan .price .amount{font-size:36px; font-weight:600; color:var(--fg)}
@@ -295,10 +317,12 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
 .demo-copy p{color:var(--muted); margin-top:14px; max-width:46ch}
 .demo-phone{display:flex; justify-content:center}
 .demo-phone, .hero-stage{animation:phoneFloat 6s ease-in-out infinite}
+.hero-stage{opacity:0; animation:phoneFloat 6s ease-in-out infinite, heroStageIn .9s cubic-bezier(.22,1,.36,1) .3s forwards}
 .demo-split.reverse .demo-phone{animation-delay:-3s}
 @keyframes phoneFloat{0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)}}
+@keyframes heroStageIn{from{opacity:0} to{opacity:1}}
 @media (prefers-reduced-motion:reduce){
-  .demo-phone, .hero-stage{animation:none}
+  .demo-phone, .hero-stage{animation:none; opacity:1}
 }
 
 /* dashboard mockup, shown inside a laptop frame */
