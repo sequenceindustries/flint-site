@@ -112,7 +112,7 @@ section{padding-block:clamp(28px,4.5vw,52px)}
   padding-top:18px; border-top:1px solid var(--border);
 }
 .hero-proof b{color:var(--fg); font-weight:600}
-.hero-stage{display:flex; justify-content:center}
+.hero-stage{display:flex; justify-content:center; align-items:center}
 
 /* platform split */
 .split{display:grid; grid-template-columns:1fr 64px 1fr; gap:24px; align-items:stretch}
@@ -329,7 +329,7 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
 .demo-split.reverse .demo-phone{order:1}
 .demo-copy h2{margin-top:6px}
 .demo-copy p{color:var(--muted); margin-top:14px; max-width:46ch}
-.demo-phone{display:flex; justify-content:center}
+.demo-phone{display:flex; justify-content:center; align-items:center}
 .demo-phone, .hero-stage{animation:phoneFloat 6s ease-in-out infinite}
 .hero-stage{opacity:0; animation:phoneFloat 6s ease-in-out infinite, heroStageIn .9s cubic-bezier(.22,1,.36,1) .3s forwards}
 .demo-split.reverse .demo-phone{animation-delay:-3s}
@@ -415,6 +415,7 @@ footer{border-top:1px solid var(--border); padding-block:40px; padding-bottom:ca
   .menu-toggle{display:block}
   .hero-grid{grid-template-columns:1fr}
   .hero-stage .phone-frame{max-width:240px}
+  .hero-stage .phone-body{height:368px}
   .split{grid-template-columns:1fr}
   .split-arrow{display:none}
   .steps{grid-template-columns:1fr 1fr}
